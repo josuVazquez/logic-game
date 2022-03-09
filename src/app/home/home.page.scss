@@ -1,4 +1,5 @@
 @import "/src/utils/mixin.scss";
+@import "/src/theme/variables.scss";
 
 @keyframes appear {
   from {transform: scaleY(0);}
@@ -9,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  height: calc(100vh - 52.391px);
 }
 
 .table {
@@ -24,7 +25,8 @@
 }
 
 .value {
-  border: 1px solid black;
+  border: 1px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
   max-width: 56px;
   width: 56px;
   height: 56px;
@@ -50,7 +52,7 @@
   border-width: 0px;
   min-width: 100%;
   max-width: 100%;
-  background-color:rgba(0, 0, 0, 0);
+  background-color: var(--ion-color-primary);
   text-align: center;
   text-transform: capitalize;
   &:focus {
@@ -76,7 +78,8 @@
   font-weight: bold;
   height: 36px;
   flex: 1 18%;
-  background-color: rgb(168, 168, 168);
+  background-color: var(--ion-color-tertiary);
+  color: var(--ion-color-tertiary-contrast);
   opacity: 0.7;
   border-radius: 20%;
   font-size: large;
@@ -111,20 +114,23 @@
 .help {
   font-size: xx-large;
   background-color: transparent;
-}
-
-.checked {
-  background-color: #4BB543;
-  color: white;
-}
-
-.discardChecked {
-  color: white;
-  background-color: #ff3333;
+  color: var(--ion-color-primary)
 }
 
 .border {
-  border: 2px solid black;
+  border: 2px solid var(--ion-color-primary);
+}
+
+.checked {
+  background-color: var(--ion-color-success);
+  color: var(--ion-color-success-contrast);
+  border: 2 solid var(--ion-color-success);
+}
+
+.discardChecked {
+  color: var(--ion-color-danger-contrast);
+  background-color: var(--ion-color-danger);
+  border: 2 solid var(--ion-color-danger);
 }
 
 .appearEffect {

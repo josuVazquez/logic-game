@@ -8,10 +8,16 @@ import { ModalController } from '@ionic/angular';
 })
 export class SettingsModalComponent {
 
+  darkMode = false;
+
   constructor(private modalController: ModalController) { }
 
   closeModal() {
     this.modalController.dismiss();
   }
 
+  darkModeToggle() {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark', this.darkMode);
+  }
 }

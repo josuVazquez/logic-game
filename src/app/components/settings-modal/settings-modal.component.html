@@ -4,6 +4,10 @@
   </ion-button>
   <h3 class="title">SETTINGS</h3>
   <article>
-    
+    <ion-item>
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>Modo oscuro</ion-label>
+      <ion-toggle slot="end" name="oscuro" color="secondary" (ionChange)="darkModeToggle()" ></ion-toggle>
+    </ion-item>
   </article>
 </ion-content>

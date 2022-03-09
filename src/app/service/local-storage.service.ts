@@ -33,6 +33,14 @@ export class LocalStorageService {
     }
   }
 
+  setDarkMode() {
+
+  }
+
+  getDarkMode() {
+    
+  }
+
   addStatistics(num) {
     const statistics = JSON.parse(localStorage.getItem('statistics')) || [];
     statistics.push(num);

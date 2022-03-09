@@ -1,3 +1,10 @@
+@mixin verySmall {
+  @media only screen and (max-width: 360px) {
+    @content;
+  }
+}
+
+
 @mixin small {
   @media only screen and (max-width: 756px) {
     @content;

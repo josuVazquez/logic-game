@@ -17,7 +17,7 @@ export class HomePage {
     {num: 5, disabled: false}, {num: 6, disabled: false}, {num: 7, disabled: false},
     {num: 8, disabled: false}, {num: 9, disabled: false}, {num: 0, disabled: false}];
   userValue = '';
-  difficulty = 8;
+  difficulty = 5;
   userGuess = [];
   numberOfTheDay = '12345';
   won;
@@ -91,6 +91,11 @@ export class HomePage {
 
       this.localStorage.addBoard(this.userValue);
       this.didWon();
+
+      if(this.won) {
+        this.info();
+      }
+
       this.userValue = '';
     }
   }

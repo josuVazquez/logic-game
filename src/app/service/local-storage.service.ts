@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
@@ -11,7 +12,7 @@ export class LocalStorageService {
   statistics: Array<any>;
   solution: string;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getSolution() {
     const data = localStorage.getItem('solution');
@@ -50,5 +51,9 @@ export class LocalStorageService {
 
   getBoard() {
     return JSON.parse(localStorage.getItem('board'));
+  }
+
+  getTodaysQuery() {
+    this.http.get(this.backEnd);
   }
 }

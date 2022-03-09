@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <ion-button fill="clear" class="top-right" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+  <h3 class="title">INFO</h3>
+  <article>
+    <div>
+      <p>Estadisticas</p>
+      <p>Jugadas: {{jugadas}}</p>
+      <p>Victorias: {{victorias}}</p>
+      <div>
+        <p>Distribucion</p>
+        <div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="timer">
+      <p>SIGUIENTE COMBINACION</p>
+      {{date | date: 'HH:mm:SS'}}
+    </div>
+  </article>
+</ion-content>

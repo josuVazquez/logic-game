@@ -1,0 +1,34 @@
+.title {
+    text-align: center;
+}
+
+.table {
+    padding: 5px;
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    tr {
+      padding: 5px;
+    }
+}
+  
+.value {
+    border: 1px solid black;
+    max-width: 35px;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-weight: bold;
+}
+  
+.valueCircle {
+    border-radius: 50%;
+}
+
+.top-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

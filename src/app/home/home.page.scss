@@ -1,0 +1,107 @@
+@import "/src/utils/mixin.scss";
+
+.table {
+  padding: 5px;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
+  width: 300px;
+  tr {
+    padding: 5px;
+
+  }
+}
+
+.value {
+  border: 1px solid black;
+  max-width: 35px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.valueCircle {
+  border-radius: 50%;
+}
+
+.circleInput {
+  border-width: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  background-color:rgba(0, 0, 0, 0);
+  text-align: center;
+  text-transform: capitalize;
+  &:focus {
+    outline: none;
+  }
+}
+
+.keybord {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+  max-width: 70%;
+}
+
+.key {
+  text-align: center;
+  font-weight: bold;
+  height: 36px;
+  flex: 1 18%;
+  background-color: rgb(168, 168, 168);
+  opacity: 0.7;
+  border-radius: 20%;
+  font-size: large;
+}
+
+.key-text {
+  width: 108px;
+}
+
+.key-delete {
+  font-size: x-large;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  > * {
+    margin-top: 2rem;
+  }
+}
+
+.header {
+  display: flex;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  
+  @include notSmall {
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.help {
+  font-size: xx-large;
+  background-color: transparent;
+}
+
+.checked {
+  background-color: #4BB543;
+  color: white;
+}
+
+.discardChecked {
+  color: white;
+  background-color: #ff3333;
+}

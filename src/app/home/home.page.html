@@ -1,0 +1,43 @@
+<ion-header class="header">
+  <button (click)="explain()" class="help">
+    <ion-icon name="help-circle-outline"></ion-icon>
+  </button>
+  <h3 class="title">NotEvenWords</h3>
+  <button fill="clear" (click)="info()" class="help">
+    <ion-icon name="stats-chart-outline"></ion-icon>
+  </button>
+  <button fill="clear" (click)="settings()" class="help">
+    <ion-icon name="settings-outline"></ion-icon>
+  </button>
+</ion-header>
+<div class="content">
+  <table class="table">
+    <tr *ngFor="let row of quizz.rows; let index = index"> 
+      <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle" 
+        [ngClass]="{discardChecked: rowValue.discardCheck, checked: rowValue.okayCheck}" 
+        (click)="toggleCheck(index, i)">
+        {{rowValue.value}}
+      </td>
+      <td *ngFor="let infoNum of row.info | keyvalue" class="value">
+        {{infoNum.value}}
+      </td>
+    </tr>
+  </table>
+
+
+  <div class="keybord">
+    <button *ngFor="let char of allNumbers" class="key" (click)="clickChar(char)" [disabled]="char.disabled">
+      {{char.num}}
+    </button>
+    <button (click)="deleteNum()" class="key">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <button (click)="clean()" class="key key-text">
+      Clean
+    </button>
+    <button (click)="enter()" class="key key-text">
+      Enviar
+    </button>
+  </div>
+
+</div>

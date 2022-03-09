@@ -1,0 +1,100 @@
+<ion-content class="ion-padding">
+    <ion-button fill="clear" class="top-right" (click)="closeModal()">
+        <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+    <h3 class="title">COMO JUGAR</h3>
+    <article>
+        <p>Adivina el codigo oculto en seis intentos.</p>
+        
+        <p>Cada intento debe tener 5 numeros no repetidos del 0 al 9.</p>
+        
+        <p>Despues de cada intento se rellenaran 2 recuadros a la derecha que contendran 2 numeros</p>
+        <p>El primero indica la cantidad de numeros que aparecen en la conbinacion correcta.</p>
+        <p>El segundo indica la cantidad de numero que aparecen en la posicion correcta.</p>
+        
+        <p>Ejemplos</p>
+        
+        <p>Uno de los numeros introducidos aparece en la conbinacion correcta.</p>
+        <table class="table">
+        <tr> 
+            <td class="value valueCircle" >
+                1
+            </td>
+            <td class="value valueCircle" >
+                2
+            </td>
+            <td class="value valueCircle" >
+                3
+            </td>
+            <td class="value valueCircle" >
+                4
+            </td>
+            <td class="value valueCircle" >
+                5
+            </td>
+            <td class="value" >
+               1
+            </td>
+            <td class="value" >
+                0
+            </td>
+        </tr>
+        </table>
+
+        <p>Uno de los numeros introducidos esta en la combinmacion correcta en la posicion correcta.</p>
+            
+        <table class="table">
+            <tr> 
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value valueCircle" >
+                    2
+                </td>
+                <td class="value valueCircle" >
+                    3
+                </td>
+                <td class="value valueCircle" >
+                    4
+                </td>
+                <td class="value valueCircle" >
+                    5
+                </td>
+                <td class="value" >
+                    3
+                </td>
+                <td class="value" >
+                    1
+                </td>
+            </tr>
+        </table>
+        
+        <p>Puede haber numeros repetidas. Las pistas son independientes para cada numero.</p>
+
+        <table class="table">
+            <tr> 
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value valueCircle" >
+                    1
+                </td>
+                <td class="value" >
+                    1
+                </td>
+                <td class="value" >
+                    1
+                </td>
+            </tr>
+        </table>
+    </article>
+</ion-content>

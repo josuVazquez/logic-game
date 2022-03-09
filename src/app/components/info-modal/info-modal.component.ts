@@ -13,9 +13,10 @@ const secondsOfDay = 60;
 export class InfoModalComponent {
   date: Date = new Date();
   time: string;
+  jugadas = 0;
+  victorias = 0;
 
-
-  constructor(private modalController: ModalController) { 
+  constructor(private modalController: ModalController) {
     this.calculateDate();
   }
 

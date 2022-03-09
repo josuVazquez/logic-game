@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 export class LocalStorageService {
+  backEnd = 'https://quizzbacknode.herokuapp.com/quizz';
   encryptSecretKey = 'thisisasecretkey';
   board: Array<string>;
   statistics: Array<any>;

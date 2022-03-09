@@ -18,7 +18,9 @@
       <tr *ngFor="let row of quizz.rows; let index = index"> 
         <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle" 
           [ngClass]="{ discardChecked: rowValue.discardCheck, checked: rowValue.okayCheck, 
-            border: rowValue.value, appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index
+            border: rowValue.value && userGuess.length === index, 
+            fillBackGround: rowValue.value && userGuess.length > index,
+            appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index
           }" 
           (click)="toggleCheck(index, i)">
           {{rowValue.value}}

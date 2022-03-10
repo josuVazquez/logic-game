@@ -13,6 +13,7 @@ import { InfoModalComponent } from './components/info-modal/info-modal.component
 import { SettingsModalComponent } from './components/settings-modal/settings-modal.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HelpModalComponent, InfoModalComponent, SettingsModalComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

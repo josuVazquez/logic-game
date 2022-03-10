@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: 'app-settings-modal',
@@ -10,14 +11,17 @@ export class SettingsModalComponent {
 
   darkMode = false;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private localStorage: LocalStorageService,
+    private modalController: ModalController) {
+    this.darkMode = this.localStorage.getDarkMode();
+  }
 
   closeModal() {
     this.modalController.dismiss();
   }
 
   darkModeToggle() {
-    this.darkMode = !this.darkMode;
     document.body.classList.toggle('dark', this.darkMode);
+    this.localStorage.setDarkMode(this.darkMode);
   }
 }

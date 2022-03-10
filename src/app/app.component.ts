@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Quizz, Row, RowInfo } from './quiz.class';
+import { LocalStorageService } from './service/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import { Quizz, Row, RowInfo } from './quiz.class';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(private localStorage: LocalStorageService) {
+    const darkMode = this.localStorage.getDarkMode();
+    document.body.classList.toggle('dark', darkMode);
   }
 }

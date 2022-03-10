@@ -33,12 +33,14 @@ export class LocalStorageService {
     }
   }
 
-  setDarkMode() {
-
+  setDarkMode(darkMode: boolean) {
+    console.log('' + darkMode);
+    localStorage.setItem('darkMode', '' + darkMode);
+    console.log('hola');
   }
 
   getDarkMode() {
-    
+    return JSON.parse(localStorage.getItem('darkMode')) || false;
   }
 
   addStatistics(num) {

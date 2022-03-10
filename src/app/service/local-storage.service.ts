@@ -49,6 +49,10 @@ export class LocalStorageService {
     localStorage.setItem('statistics', JSON.stringify(statistics));
   }
 
+  getStadistics() {
+    return JSON.parse(localStorage.getItem('statistics')) || [];
+  }
+
   addBoard(conbination) {
     const board = JSON.parse(localStorage.getItem('board')) || [];
     board.push(conbination);

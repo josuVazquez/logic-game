@@ -113,7 +113,7 @@
 .help {
   font-size: xx-large;
   background-color: transparent;
-  color: var(--ion-color-primary)
+  color: var(--ion-color-primary-shade);
 }
 
 .border {
@@ -125,7 +125,7 @@
 }
 
 .checked {
-  background-color: var(--ion-color-success);
+  background-color: var(--ion-color-success) !important;
   color: var(--ion-color-success-contrast);
   border: 2 solid var(--ion-color-success);
 }

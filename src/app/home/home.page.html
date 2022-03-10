@@ -17,10 +17,11 @@
     <table class="table">
       <tr *ngFor="let row of quizz.rows; let index = index"> 
         <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle" 
-          [ngClass]="{ discardChecked: rowValue.discardCheck, checked: rowValue.okayCheck, 
+          [ngClass]="{ discardChecked: rowValue.discardCheck, 
             border: rowValue.value && userGuess.length === index, 
+            appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index,
             fillBackGround: rowValue.value && userGuess.length > index,
-            appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index
+            checked: rowValue.okayCheck || (won && userGuess.length - 1 === index)
           }" 
           (click)="toggleCheck(index, i)">
           {{rowValue.value}}
@@ -30,7 +31,6 @@
         </td>
       </tr>
     </table>
-
 
     <div class="keybord">
       <button *ngFor="let char of allNumbers" class="key" (click)="clickChar(char)" [disabled]="char.disabled">

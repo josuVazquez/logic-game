@@ -6,12 +6,14 @@
   <article>
     <div class="stadistics">
       <p>Estadisticas</p>
-      <p>Jugadas: {{jugadas}}</p>
-      <p>Victorias: {{victorias}}</p>
+      <p>Jugadas: {{played}}</p>
+      <p>Victorias: {{won}}</p>
       <div>
         <p>Distribucion</p>
-        <div>
-          
+        <div *ngFor="let stat of percentage" class="progress">
+          {{stat + 1 === 6 ? 'X' : stat + 1}}
+          <div *ngFor="let box of progress(stat)" class="box">
+          </div>
         </div>
       </div>
     </div>

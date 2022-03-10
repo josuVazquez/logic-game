@@ -30,6 +30,8 @@ export class HomePage {
       rows: []
     });
 
+    this.localStorage.getSolution();
+
     for(let i = 0; i < this.difficulty; i++) {
       const result = new Row({
         info: new RowInfo()
@@ -90,10 +92,12 @@ export class HomePage {
       this.addRowToQuizz();
 
       this.localStorage.addBoard(this.userValue);
-      this.didWon();
 
       if(this.won) {
         this.info();
+        this.localStorage.addStatistics(this.userGuess.length);
+      } else if(this.userGuess.length >= this.difficulty) {
+        this.localStorage.addStatistics(6);
       }
 
       this.userValue = '';
@@ -105,7 +109,7 @@ export class HomePage {
 
     if(rowInfo.numPositionCorrect > 4) {
       this.quizz.finish(this.userGuess.length);
-      this.localStorage.addStatistics(this.userGuess.length);
+      this.won = true;
     }
 
     this.quizz.setUserValue(this.userValue, rowInfo, this.userGuess.length);

@@ -17,13 +17,13 @@
     <table class="table">
       <tr *ngFor="let row of quizz.rows; let index = index"> 
         <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle" 
-          [ngClass]="{ discardChecked: rowValue.discardCheck, 
+          [ngClass]="{ 
             border: rowValue.value && userGuess.length === index, 
             appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index,
             fillBackGround: rowValue.value && userGuess.length > index,
-            checked: rowValue.okayCheck || (won && userGuess.length - 1 === index)
-          }" 
-          (click)="toggleCheck(index, i)">
+            checked: rowValue.okayCheck || (won && userGuess.length - 1 === index),
+            discardChecked: rowValue.discardCheck
+          }" >
           {{rowValue.value}}
         </td>
         <td *ngFor="let infoNum of row.info | keyvalue" class="value">

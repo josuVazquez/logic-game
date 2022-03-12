@@ -19,7 +19,7 @@ export class HomePage {
   userValue = '';
   difficulty = 5;
   userGuess = [];
-  numberOfTheDay = '12345';
+  numberOfTheDay;
   won;
   disabledChars = [];
   modalOpen = false;
@@ -30,7 +30,7 @@ export class HomePage {
       rows: []
     });
 
-    this.localStorage.getSolution();
+    this.numberOfTheDay = this.localStorage.getSolution();
 
     for(let i = 0; i < this.difficulty; i++) {
       const result = new Row({
@@ -164,10 +164,6 @@ export class HomePage {
     });
     await modal.present();
     this.modalOpen = false;
-  }
-
-  toggleCheck(row, column) {
-    this.quizz.toggleCheckCell(row, column);
   }
 
   clean() {

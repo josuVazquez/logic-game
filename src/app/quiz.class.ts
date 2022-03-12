@@ -38,19 +38,6 @@ export class Quizz {
         });
     }
 
-    toggleCheckCell(row, column) {
-        const value = this.rows[row].cells[column];
-        if(!value.okayCheck && !value.discardCheck) {
-            value.okayCheck = true;
-        } else if (value.okayCheck) {
-            value.okayCheck = false;
-            value.discardCheck = true;
-        } else if (value.discardCheck) {
-            value.okayCheck = false;
-            value.discardCheck = false;
-        }
-    }
-
     clearCheck() {
         this.rows.forEach(row => {
             row.cells.forEach(val => {

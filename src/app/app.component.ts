@@ -12,5 +12,6 @@ export class AppComponent {
   constructor(private localStorage: LocalStorageService) {
     const darkMode = this.localStorage.getDarkMode();
     document.body.classList.toggle('dark', darkMode);
+    this.localStorage.getTodaysQuery();
   }
 }

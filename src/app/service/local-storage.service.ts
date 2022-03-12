@@ -20,23 +20,38 @@ export class LocalStorageService {
       return;
     }
 
-    const unEncrypted = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
-    return unEncrypted;
+    return CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);
   }
 
   setSolution(solution) {
     try {
-      const solutionCrypt = CryptoJS.AES.encrypt(JSON.stringify(solution), this.encryptSecretKey).toString();
+      const solutionCrypt = CryptoJS.AES.encrypt(solution.trim(), this.encryptSecretKey.trim()).toString();
       localStorage.setItem('solution', solutionCrypt);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
+  setDate(date) {
+    try {
+      const dateCrypt = CryptoJS.AES.encrypt(date.trim(), this.encryptSecretKey.trim()).toString();
+      localStorage.setItem('date', dateCrypt);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  getDate() {
+    const data = localStorage.getItem('date');
+    if (!data) {
+      return;
+    }
+
+    return CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);
+  }
+
   setDarkMode(darkMode: boolean) {
-    console.log('' + darkMode);
     localStorage.setItem('darkMode', '' + darkMode);
-    console.log('hola');
   }
 
   getDarkMode() {
@@ -68,6 +83,9 @@ export class LocalStorageService {
   }
 
   getTodaysQuery() {
-    this.http.get(this.backEnd);
+    this.http.get(this.backEnd).subscribe( res => {
+      this.setSolution(res[0].code);
+      this.setDate(res[0].date);
+    });
   }
 }

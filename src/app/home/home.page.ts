@@ -17,7 +17,7 @@ export class HomePage {
     {num: 5, disabled: false}, {num: 6, disabled: false}, {num: 7, disabled: false},
     {num: 8, disabled: false}, {num: 9, disabled: false}, {num: 0, disabled: false}];
   userValue = '';
-  difficulty = 5;
+  difficulty = 7;
   userGuess = [];
   numberOfTheDay;
   won;
@@ -79,7 +79,7 @@ export class HomePage {
   }
 
   clickChar(char) {
-    if(this.userValue.length < 5 && !this.won) {
+    if(this.userValue.length < 7 && !this.won) {
       this.userValue += char.num;
       char.disabled = true;
       this.disabledChars.push(char);
@@ -88,7 +88,7 @@ export class HomePage {
   }
 
   enter() {
-    if(this.userValue.length === 5) {
+    if(this.userValue.length === 7) {
       this.addRowToQuizz();
 
       this.localStorage.addBoard(this.userValue);
@@ -185,4 +185,12 @@ export class HomePage {
     this.won = this.userValue === this.numberOfTheDay;
   }
 
+  onPosition(char, index) {
+    return char === this.numberOfTheDay.charAt(index);
+  }
+
+  onSolution(char) {
+    return this.numberOfTheDay.includes(char);
+
+  }
 }

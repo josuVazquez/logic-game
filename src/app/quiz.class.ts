@@ -61,6 +61,8 @@ export class Row {
             new Cell({value: ''}),
             new Cell({value: ''}),
             new Cell({value: ''}),
+            new Cell({value: ''}),
+            new Cell({value: ''}),
             new Cell({value: ''})
         ];
         this.cells = data.cells || defualtValue;

@@ -130,18 +130,18 @@
 
 .checked {
   background-color: var(--ion-color-success) !important;
-  color: var(--ion-color-success-contrast);
-  border: 2 solid var(--ion-color-success);
+  color: var(--ion-color-success-contrast) !important;
+  border: 2 solid var(--ion-color-success) !important;
 }
 
-.discardChecked {
-  color: var(--ion-color-danger-contrast);
-  background-color: var(--ion-color-danger);
-  border: 2 solid var(--ion-color-danger);
+.warn {
+  color: var(--ion-color-warning-contrast);
+  background-color: var(--ion-color-warning);
+  border: 2 solid var(--ion-color-warning);
 }
 
 .appearEffect {
-  background-color: var(--ion-color-primary);
+  // background-color: var(--ion-color-primary);
   animation-name: appear;
   animation-duration: 0.5s;
 }

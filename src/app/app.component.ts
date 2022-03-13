@@ -9,8 +9,6 @@ import { LocalStorageService } from './service/local-storage.service';
 })
 export class AppComponent {
 
-  // {"publicKey":"BE6REuttfHAIG-nGhDM9o3Hu-YgFfLmIEdQcGbGKWL5iF8n-n2iJxkCMr2RlB3x3XF8h1XL3vdw2zqn22Pz3wj4","privateKey":"T9COxnyeGceOq54Da6l-so2DkmT5Ukh9XFc-nt_ZHEw"}
-
   readonly vapidPublicKey = 'BE6REuttfHAIG-nGhDM9o3Hu-YgFfLmIEdQcGbGKWL5iF8n-n2iJxkCMr2RlB3x3XF8h1XL3vdw2zqn22Pz3wj4';
 
   constructor(
@@ -19,6 +17,7 @@ export class AppComponent {
         const darkMode = this.localStorage.getDarkMode();
         document.body.classList.toggle('dark', darkMode);
         this.localStorage.getTodaysQuery();
+        this.subscribeToNotifications();
       }
 
   subscribeToNotifications() {

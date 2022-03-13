@@ -17,7 +17,7 @@ export class LocalStorageService {
   getSolution() {
     const data = localStorage.getItem('solution');
     if (!data) {
-      return;
+      return '';
     }
 
     return CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);

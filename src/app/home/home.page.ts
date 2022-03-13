@@ -21,7 +21,7 @@ export class HomePage {
   userValue = '';
   difficulty = 7;
   userGuess = [];
-  numberOfTheDay;
+  numberOfTheDay = '';
   currentDate: Date;
   won;
   disabledChars = [];

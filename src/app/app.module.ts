@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy, IonModal } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HelpModalComponent } from './components/help-modal/help-modal.component';
 import { InfoModalComponent } from './components/info-modal/info-modal.component';
@@ -32,7 +32,8 @@ initializeApp(environment.firebaseConfig);
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

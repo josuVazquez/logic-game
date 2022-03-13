@@ -11,8 +11,8 @@
       <div>
         <p>Distribucion</p>
         <div *ngFor="let stat of percentage" class="progress">
-          {{stat + 1 === 6 ? 'X' : stat + 1}}
-          <div *ngFor="let box of progress(stat)" class="box">
+          {{stat.num + 1 === 6 ? 'X' : stat.num + 1}}
+          <div *ngFor="let box of stat.progress" class="box">
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
     <hr/>
     <div class="timer">
       <p>SIGUIENTE COMBINACION</p>
-      {{date | date: 'HH:mm:SS'}}
+      {{timerDate | date: 'HH:mm:ss'}}
     </div>
   </article>
 </ion-content>

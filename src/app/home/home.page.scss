@@ -30,10 +30,12 @@
   max-width: 56px;
   width: 56px;
   height: 56px;
+  font-size: x-large;
   @include small {
     max-width: 44px;
     width: 44px;
     height: 44px;
+    font-size: large;
   }
   @include verySmall {
     max-width: 33px;
@@ -82,6 +84,10 @@
   color: var(--ion-color-primary-contrast);
   border-radius: 20%;
   font-size: large;
+  
+  @include notSmall {
+    font-size: x-large;
+  }
 }
 
 .key:disabled {
@@ -90,10 +96,6 @@
 
 .key-text {
   width: 108px;
-}
-
-.key-delete {
-  font-size: x-large;
 }
 
 .header {

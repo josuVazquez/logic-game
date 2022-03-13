@@ -21,14 +21,11 @@
             border: rowValue.value && userGuess.length === index, 
             appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index,
             fillBackGround: rowValue.value && userGuess.length > index,
-            checked: (rowValue.value === numberOfTheDay.charAt(i) && userGuess.length > index) || (won && userGuess.length - 1 === index),
+            checked: (rowValue.value === numberOfTheDay.charAt(i) && userGuess.length > index),
             warn: numberOfTheDay.includes(rowValue.value) && userGuess.length > index
           }" >
           {{rowValue.value}}
         </td>
-        <!-- <td *ngFor="let infoNum of row.info | keyvalue" class="value">
-          {{infoNum.value}}
-        </td> -->
       </tr>
     </table>
 

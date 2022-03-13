@@ -6,6 +6,8 @@ import { SettingsModalComponent } from '../components/settings-modal/settings-mo
 import { Quizz, Row, RowInfo, Cell } from '../quiz.class';
 import { LocalStorageService } from '../service/local-storage.service';
 
+const millisecondsOnADay = 86400000;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -20,12 +22,20 @@ export class HomePage {
   difficulty = 7;
   userGuess = [];
   numberOfTheDay;
+  currentDate: Date;
   won;
   disabledChars = [];
   modalOpen = false;
 
   constructor(private localStorage: LocalStorageService,
     private modalController: ModalController) {
+    this.currentDate = this.localStorage.getDate();
+
+    if(this.currentDate && new Date() > new Date( this.currentDate.getTime() + millisecondsOnADay)) {
+      this.won = false;
+      this.localStorage.getTodaysQuery();
+    }
+
     this.quizz = new Quizz({
       rows: []
     });
@@ -107,7 +117,7 @@ export class HomePage {
   addRowToQuizz() {
     const rowInfo = this.setRowInfo();
 
-    if(rowInfo.numPositionCorrect > 4) {
+    if(rowInfo.numPositionCorrect > 6) {
       this.quizz.finish(this.userGuess.length);
       this.won = true;
     }

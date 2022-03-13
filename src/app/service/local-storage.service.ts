@@ -47,7 +47,7 @@ export class LocalStorageService {
       return;
     }
 
-    return CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);
+    return new Date(CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8));
   }
 
   setDarkMode(darkMode: boolean) {

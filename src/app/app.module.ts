@@ -14,6 +14,9 @@ import { SettingsModalComponent } from './components/settings-modal/settings-mod
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { initializeApp } from 'firebase/app';
+
+initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [AppComponent, HelpModalComponent, InfoModalComponent, SettingsModalComponent],
@@ -24,6 +27,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

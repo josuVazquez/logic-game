@@ -1,3 +1,5 @@
+@import "/src/theme/variables.scss";
+
 .top-right {
     position: absolute;
     top: 0px;
@@ -35,5 +37,5 @@ h3 {
 .box {
     height: 12px;
     width: 12px;
-    background-color: black;
+    background-color: var(--ion-color-primary-contrast);;
 }

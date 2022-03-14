@@ -9,7 +9,7 @@
       <p>Jugadas: {{played}}</p>
       <p>Victorias: {{won}}</p>
       <div>
-        <p>Distribucion</p>
+        <p>Porcentaje</p>
         <div *ngFor="let stat of percentage" class="progress">
           {{stat.num + 1 === 6 ? 'X' : stat.num + 1}}
           <div *ngFor="let box of stat.progress" class="box">

@@ -1,3 +1,8 @@
+@keyframes appear {
+    from {transform: scaleY(0);}
+    to {transform: scaleY(1);}
+}
+
 .title {
     text-align: center;
 }
@@ -35,4 +40,25 @@
 
 h3 {
     font-weight: bold;
+}
+
+.fillBackGround {
+    background-color: var(--ion-color-primary);
+}
+  
+.checked {
+    background-color: var(--ion-color-success) !important;
+    color: var(--ion-color-success-contrast) !important;
+    border: 2 solid var(--ion-color-success) !important;
+}
+
+.warn {
+    color: var(--ion-color-warning-contrast);
+    background-color: var(--ion-color-warning);
+    border: 2 solid var(--ion-color-warning);
+}
+
+.appearEffect {
+    animation-name: appear;
+    animation-duration: 0.5s;
 }

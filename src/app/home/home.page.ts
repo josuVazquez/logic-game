@@ -103,15 +103,17 @@ export class HomePage {
 
       this.localStorage.addBoard(this.userValue);
 
-      if(this.won) {
-        this.info();
-        this.localStorage.addStatistics(this.userGuess.length);
-      } else if(this.userGuess.length >= this.difficulty) {
-        this.localStorage.addStatistics(6);
+      if(this.won || this.userGuess.length >= this.difficulty) {
+        this.endToday();
       }
 
       this.userValue = '';
     }
+  }
+
+  endToday() {
+    this.info();
+    this.localStorage.addStatistics(this.userGuess.length);
   }
 
   addRowToQuizz() {

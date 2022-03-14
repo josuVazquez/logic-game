@@ -83,9 +83,9 @@ export class LocalStorageService {
   }
 
   getTodaysQuery() {
-    this.http.get(this.backEnd).subscribe( res => {
-      this.setSolution(res[0].code);
-      this.setDate(res[0].date);
+    this.http.get(this.backEnd).subscribe( (res: any) => {
+      this.setSolution(res.code);
+      this.setDate(res.date);
     });
   }
 }

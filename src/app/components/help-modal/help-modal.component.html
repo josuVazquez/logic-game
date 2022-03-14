@@ -4,21 +4,18 @@
     </ion-button>
     <h3 class="title">COMO JUGAR</h3>
     <article>
-        <p>Adivina el codigo oculto en seis intentos.</p>
-        
-        <p>Cada intento debe tener 5 numeros no repetidos del 0 al 9.</p>
-        
-        <p>Despues de cada intento se rellenaran 2 recuadros a la derecha que contendran 2 numeros</p>
-        <p>El primero indica la cantidad de numeros que aparecen en la conbinacion correcta.</p>
-        <p>El segundo indica la cantidad de numero que aparecen en la posicion correcta.</p>
-        
+        <p>Adivina el codigo oculto en siete intentos.</p>
+
+        <p>Cada intento debe tener 7 numeros del 0 al 9, los numero se pueden repetir.</p>
+
+        <p>Después de cada intento el color de los numeros cambia para mostrar qué tan cerca estás de acertar la conmbinacion.</p>
+
         <p>Ejemplos</p>
-        
-        <p>Uno de los numeros introducidos aparece en la conbinacion correcta.</p>
+        <p>El numero 3 esta en la combinacion y en posicion correcta</p>
         <table class="table">
-        <tr> 
-            <td class="value valueCircle" >
-                1
+        <tr>
+            <td class="value valueCircle checked appearEffect" >
+                3
             </td>
             <td class="value valueCircle" >
                 2
@@ -32,20 +29,20 @@
             <td class="value valueCircle" >
                 5
             </td>
-            <td class="value" >
-               1
+            <td class="value valueCircle" >
+                5
             </td>
-            <td class="value" >
-                0
+            <td class="value valueCircle warn" >
+                3
             </td>
         </tr>
         </table>
 
-        <p>Uno de los numeros introducidos esta en la combinmacion correcta en la posicion correcta.</p>
-            
+        <p>El numero 1 esta en la combinacion pero no esta en la posicion correcta.</p>
+
         <table class="table">
-            <tr> 
-                <td class="value valueCircle" >
+            <tr>
+                <td class="value valueCircle warn appearEffect" >
                     1
                 </td>
                 <td class="value valueCircle" >
@@ -60,39 +57,39 @@
                 <td class="value valueCircle" >
                     5
                 </td>
-                <td class="value" >
-                    3
+                <td class="value valueCircle" >
+                    5
                 </td>
-                <td class="value" >
-                    1
+                <td class="value valueCircle" >
+                    3
                 </td>
             </tr>
         </table>
-        
-        <p>Puede haber numeros repetidas. Las pistas son independientes para cada numero.</p>
+
+        <p>El numero 2 no esta en la conmbinacion.</p>
 
         <table class="table">
-            <tr> 
+            <tr>
                 <td class="value valueCircle" >
                     1
                 </td>
-                <td class="value valueCircle" >
-                    1
+                <td class="value valueCircle fillBackGround appearEffect" >
+                    2
                 </td>
                 <td class="value valueCircle" >
-                    1
+                    3
                 </td>
                 <td class="value valueCircle" >
-                    1
+                    4
                 </td>
                 <td class="value valueCircle" >
-                    1
+                    5
                 </td>
-                <td class="value" >
-                    1
+                <td class="value valueCircle" >
+                    5
                 </td>
-                <td class="value" >
-                    1
+                <td class="value valueCircle" >
+                    3
                 </td>
             </tr>
         </table>

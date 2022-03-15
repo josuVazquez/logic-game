@@ -49,6 +49,7 @@ export class HomePage {
   loadTodaysBoard() {
     const rows = this.localStorage.getBoard();
     if(!rows) {
+      this.explain();
       return;
     }
 

@@ -18,8 +18,8 @@
       <tr *ngFor="let row of quizz.rows; let index = index"> 
         <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle" 
           [ngClass]="{ 
-            border: rowValue.value && userGuess.length === index, 
-            appearEffect: rowValue.value && userValue === '' && userGuess.length -1 === index,
+            border: rowValue.value && userGuess.length === index,
+            allEffect: rowValue.value && userGuess.length === index,
             fillBackGround: rowValue.value && userGuess.length > index,
             checked: (rowValue.value === numberOfTheDay.charAt(i) && userGuess.length > index),
             warn: numberOfTheDay.includes(rowValue.value) && userGuess.length > index

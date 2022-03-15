@@ -30,12 +30,15 @@ h3 {
 
 .progress {
     display: flex;
+    padding: 0.25rem;
     flex-direction: row;
+    align-items: center;
     gap: 6px;
 }
 
 .box {
     height: 12px;
     width: 12px;
+    border-radius: 2px;
     background-color: var(--ion-color-primary-contrast);;
 }

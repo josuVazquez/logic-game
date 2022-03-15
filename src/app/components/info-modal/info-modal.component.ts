@@ -14,7 +14,7 @@ export class InfoModalComponent implements OnDestroy {
   stats = [];
   played = 0;
   won = 0;
-  percentage: any = [...Array(6).keys()];
+  percentage: any = [...Array(8).keys()];
   timerDate: Date;
   timerRef: any;
   nextQuizzDate: Date = new Date();
@@ -28,10 +28,12 @@ export class InfoModalComponent implements OnDestroy {
     this.setTimer();
 
     this.stats = this.localStorage.getStadistics();
+    console.log(this.stats);
     this.played = this.stats.length;
     this.won = this.stats.filter( p => p <= 5).length;
 
     this.percentage = this.percentage.map( per => ({num: per, progress: [...this.progress(per)]}) );
+    console.log(this.percentage);
   }
 
   ngOnDestroy(): void {
@@ -43,6 +45,7 @@ export class InfoModalComponent implements OnDestroy {
   }
 
   progress(pos: number) {
+    console.log(this.stats);
     const num = Math.round(this.stats.filter( p => p === pos).length / this.stats.length * 10) || 0;
     return Array(num).keys();
   }

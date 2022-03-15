@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 
@@ -21,7 +21,10 @@ export class InfoModalComponent implements OnDestroy {
 
   constructor(private modalController: ModalController,
     private localStorage: LocalStorageService) {
-    this.nextQuizzDate = new Date(this.localStorage.getDate().getTime() + millisecondsOnADay);
+
+    this.localStorage.newQuizz$.subscribe( res => {
+      this.nextQuizzDate = res.nextDate;
+    });
     this.setTimer();
 
     this.stats = this.localStorage.getStadistics();
@@ -29,8 +32,8 @@ export class InfoModalComponent implements OnDestroy {
     this.won = this.stats.filter( p => p <= 5).length;
 
     this.percentage = this.percentage.map( per => ({num: per, progress: [...this.progress(per)]}) );
-    console.log(this.percentage);
   }
+
   ngOnDestroy(): void {
     clearInterval(this.timerRef);
   }

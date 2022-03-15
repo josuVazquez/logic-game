@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { QuizzInfo } from '../core/model/quiz-info.model';
+
+const millisecondsOnADay = 86400000;
 
 @Injectable({
   providedIn: 'root'
@@ -10,44 +14,33 @@ export class LocalStorageService {
   encryptSecretKey = 'thisisasecretkey';
   board: Array<string>;
   statistics: Array<any>;
-  solution: string;
+
+  newQuizz$ = new BehaviorSubject<QuizzInfo>(new QuizzInfo());
 
   constructor(private http: HttpClient) { }
 
-  getSolution() {
-    const data = localStorage.getItem('solution');
-    if (!data) {
-      return '';
-    }
-
-    return CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);
-  }
-
-  setSolution(solution) {
+  setQuizz(quiz) {
     try {
-      const solutionCrypt = CryptoJS.AES.encrypt(solution.trim(), this.encryptSecretKey.trim()).toString();
+      const solutionCrypt = CryptoJS.AES.encrypt(quiz.code.trim(), this.encryptSecretKey.trim()).toString();
+      const dateCrypt = CryptoJS.AES.encrypt(quiz.date.trim(), this.encryptSecretKey.trim()).toString();
+      localStorage.setItem('date', dateCrypt);
       localStorage.setItem('solution', solutionCrypt);
     } catch (e) {
       console.error(e);
     }
   }
 
-  setDate(date) {
-    try {
-      const dateCrypt = CryptoJS.AES.encrypt(date.trim(), this.encryptSecretKey.trim()).toString();
-      localStorage.setItem('date', dateCrypt);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  getQuizz() {
+    const val = localStorage.getItem('solution');
+    const dat = localStorage.getItem('date');
 
-  getDate() {
-    const data = localStorage.getItem('date');
-    if (!data) {
+    if(!val || !dat) {
       return;
     }
 
-    return new Date(CryptoJS.AES.decrypt(data.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8));
+    const date = new Date(CryptoJS.AES.decrypt(dat.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8));
+    const code = CryptoJS.AES.decrypt(val.trim(), this.encryptSecretKey.trim()).toString(CryptoJS.enc.Utf8);
+    return new QuizzInfo({date, code, nextDate: new Date(date.getTime() + millisecondsOnADay)});
   }
 
   setDarkMode(darkMode: boolean) {
@@ -83,9 +76,17 @@ export class LocalStorageService {
   }
 
   getTodaysQuery() {
-    this.http.get(this.backEnd).subscribe( (res: any) => {
-      this.setSolution(res.code);
-      this.setDate(res.date);
-    });
+    const quizz = this.getQuizz();
+    if(!quizz || new Date() > new Date( quizz.date.getTime() + millisecondsOnADay)) {
+      this.http.get(this.backEnd).subscribe( (res: any) => {
+        this.setQuizz(res);
+        this.newQuizz$.next(new QuizzInfo({...res, nextDate: new Date(new Date(res.date).getTime() + millisecondsOnADay)}));
+        this.resetBoard();
+      }, (error) => {
+        console.error();
+      });
+    } else {
+      this.newQuizz$.next(new QuizzInfo(quizz));
+    }
   }
 }

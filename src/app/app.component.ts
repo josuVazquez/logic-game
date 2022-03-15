@@ -22,21 +22,8 @@ export class AppComponent {
     translate.setDefaultLang(translate.currentLang);
     const darkMode = this.localStorage.getDarkMode();
     document.body.classList.toggle('dark', darkMode);
-    this.loadQuizz();
+    this.localStorage.getTodaysQuery();
     this.subscribeToNotifications();
-  }
-
-  loadQuizz() {
-    const currentQuizzDate = this.localStorage.getDate();
-    if(!currentQuizzDate) {
-      return;
-    }
-
-    const nextDate = new Date(currentQuizzDate.getTime() + millisecondsOnADay);
-    if (nextDate < new Date()) {
-      this.localStorage.resetBoard();
-      this.localStorage.getTodaysQuery();
-    }
   }
 
   subscribeToNotifications() {

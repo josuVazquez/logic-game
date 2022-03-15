@@ -7,16 +7,6 @@ export class Quizz {
         this.rows = data.rows;
     }
 
-    // get allChars() {
-    //     const result = [];
-    //     this.rows.forEach( row => row.values.forEach( char => {
-    //         if( char.value && !result.find(ch => ch === char.value)) {
-    //             result.push(char.value);
-    //         }
-    //     }));
-    //     return result;
-    // }
-
     setUserValue(value, rowInfo = {}, row) {
         this.cleanRow(row);
         [...value].forEach((char, index) => {

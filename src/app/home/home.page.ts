@@ -174,6 +174,10 @@ export class HomePage {
     row2Arr[this.selectedChar.col] = row1Arr[val.col];
     row1Arr[val.col] = letter2;
 
+    if(val.row === this.selectedChar.row) {
+      row2Arr[val.col] = letter2;
+    }
+
     this.addRowToQuizz(row1Arr.join(''), val.row);
     this.addRowToQuizz(row2Arr.join(''), this.selectedChar.row);
 
@@ -181,6 +185,10 @@ export class HomePage {
     this.userNumbers[this.selectedChar.row] = row2Arr.join('');
     this.selectedChar = null;
     this.localStorage.addBoard(this.userNumbers);
+
+    if(this.quizz.numCorrectRows().length === 7) {
+      this.timeOut();
+    }
   }
 
   timeOut() {
@@ -188,6 +196,7 @@ export class HomePage {
     this.running = false;
     clearInterval(this.timerRef);
     this.localStorage.setRemainingTime(0);
+    this.localStorage.addStatistics(this.quizz.numCorrectRows().length);
     this.counter.setMinutes(0);
     this.counter.setSeconds(0);
     this.info();

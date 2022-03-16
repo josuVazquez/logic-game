@@ -15,11 +15,9 @@ export class Quizz {
         this.rows[row].info = new RowInfo(rowInfo);
     }
 
-    finish(row) {
-        this.rows[row].cells.forEach(cell => {
-            cell.okayCheck = true;
-            cell.discardCheck = false;
-        });
+
+    numCorrectRows() {
+        return this.rows.filter( row => row.info.numPositionCorrect === 7);
     }
 
     cleanRow(row) {

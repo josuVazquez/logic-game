@@ -6,7 +6,8 @@ import { SettingsModalComponent } from '../components/settings-modal/settings-mo
 import { Quizz, Row, RowInfo } from '../quiz.class';
 import { LocalStorageService } from '../service/local-storage.service';
 
-
+const millisecondsOnOneSecond = 1000;
+const millisecondsOnFiveMinutes = 300000;
 
 @Component({
   selector: 'app-home',
@@ -15,23 +16,25 @@ import { LocalStorageService } from '../service/local-storage.service';
 })
 export class HomePage {
   quizz: Quizz;
-  allNumbers = [{num: 1, disabled: false}, {num: 2, disabled: false}, {num: 3, disabled: false}, {num: 4, disabled: false},
-    {num: 5, disabled: false}, {num: 6, disabled: false}, {num: 7, disabled: false},
-    {num: 8, disabled: false}, {num: 9, disabled: false}, {num: 0, disabled: false}];
-  userValue = '';
   difficulty = 7;
-  userGuess = [];
-  numberOfTheDay = '';
+  numbersOfTheDay = [];
+  userNumbers = [];
   currentDate: Date;
-  won;
+  finish = false;
   modalOpen = false;
+  selectedChar: any;
+  counter: Date = new Date();
+  timerRef: any;
+  running = false;
 
   constructor(private localStorage: LocalStorageService,
-    private modalController: ModalController) {
+  private modalController: ModalController) {
+    this.counter.setMinutes(0);
+    this.counter.setSeconds(0);
+    this.counter.setMilliseconds(0);
     this.quizz = new Quizz({
       rows: []
     });
-
     for(let i = 0; i < this.difficulty; i++) {
       const result = new Row({
         info: new RowInfo()
@@ -40,71 +43,76 @@ export class HomePage {
     }
 
     this.localStorage.newQuizz$.subscribe( quizz => {
-      this.numberOfTheDay = quizz.code;
+      if(!quizz.date) {
+        return;
+      }
+      this.numbersOfTheDay = quizz.codes;
       this.currentDate = quizz.date;
-      this.loadTodaysBoard();
+
+      if(this.localStorage.getRemainingTime() < millisecondsOnFiveMinutes) {
+        this.start();
+      }
     });
+  }
+
+  start() {
+    this.running = true;
+    this.userNumbers = [...this.numbersOfTheDay];
+    this.loadTodaysBoard();
+    this.localStorage.addBoard(this.userNumbers);
+    this.startTimer();
+  }
+
+  disorderArray(arr) {
+    const codes = arr.join('').split('');
+
+    let currentIndex = codes.length;
+    const res = [];
+
+    while (currentIndex !== 0) {
+      const randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [codes[currentIndex], codes[randomIndex]] = [
+        codes[randomIndex], codes[currentIndex]];
+    }
+    for(let i = 0; i < codes.length; i ++) {
+      const actualPosition = i * this.difficulty;
+      res.push(codes.slice(actualPosition, actualPosition + this.difficulty).join(''));
+    }
+    return res.filter( ar => ar);
   }
 
   loadTodaysBoard() {
-    const rows = this.localStorage.getBoard();
-    if(!rows) {
-      this.explain();
-      return;
+    let rows = this.localStorage.getBoard();
+    if(!rows || !rows.length) {
+      this.userNumbers = this.disorderArray(this.userNumbers);
+      rows = [...this.userNumbers];
+    } else {
+      this.userNumbers = [...rows];
     }
 
-    rows.forEach( row => {
-      this.userValue = row;
-      this.addRowToQuizz();
+    rows.forEach( (row, index) => {
+      this.addRowToQuizz(row, index);
     });
-    this.didWon();
-    this.userValue = '';
-  }
-
-  clickChar(char) {
-    if(this.userValue.length < 7 && !this.won) {
-      this.userValue += char.num;
-      this.quizz.setUserValue(this.userValue, {}, this.userGuess.length);
-    }
-  }
-
-  enter() {
-    if(this.userValue.length === 7) {
-      this.addRowToQuizz();
-
-      this.localStorage.addBoard(this.userValue);
-
-      if(this.won || this.userGuess.length >= this.difficulty) {
-        this.endToday();
-      }
-
-      this.userValue = '';
-    }
   }
 
   endToday() {
-    this.localStorage.addStatistics(this.userGuess.length);
+    const numberOfCorrectRows = 0;
+    this.localStorage.addStatistics(numberOfCorrectRows);
     this.info();
   }
 
-  addRowToQuizz() {
-    const rowInfo = this.setRowInfo();
-
-    if(rowInfo.numPositionCorrect > 6) {
-      this.quizz.finish(this.userGuess.length);
-      this.won = true;
-    }
-
-    this.quizz.setUserValue(this.userValue, rowInfo, this.userGuess.length);
-    this.userGuess.push(this.userValue);
+  addRowToQuizz(row, index) {
+    const rowInfo = this.setRowInfo(row, index);
+    this.quizz.setUserValue(row, rowInfo, index);
   }
 
-  setRowInfo() {
+  setRowInfo(row, index) {
     let numPositionCorrect = 0;
     let numCorrect = 0;
 
-    [...this.userValue].forEach((userNum, userIndex) => {
-      [...this.numberOfTheDay].forEach((numberOfDay, dayIndex) => {
+    [...row].forEach((userNum, userIndex) => {
+      [...this.numbersOfTheDay[index]].forEach((numberOfDay, dayIndex) => {
         if (userNum === numberOfDay) {
           numCorrect++;
           if (userIndex === dayIndex) {
@@ -142,13 +150,59 @@ export class HomePage {
     this.modalOpen = false;
   }
 
-  deleteNum() {
-    this.userValue = this.userValue.slice(0, this.userValue.length - 1);
+  select(val) {
+    if(this.finish) {
+      return;
+    } else if(!this.selectedChar) {
+      this.selectedChar = { ...val };
+      return;
+    } else if( val.col === this.selectedChar.col && val.row === this.selectedChar.row) {
+      this.selectedChar = null;
+      return;
+    }
 
-    this.quizz.setUserValue(this.userValue, {}, this.userGuess.length);
+    this.changePositions(val);
   }
 
-  didWon() {
-    this.won = this.userValue === this.numberOfTheDay;
+  changePositions(val: any) {
+    const row1 = this.userNumbers[val.row];
+    const row1Arr = row1.split('');
+    const row2 = this.userNumbers[this.selectedChar.row];
+    const row2Arr = row2.split('');
+
+    const letter2 = row2Arr[this.selectedChar.col];
+    row2Arr[this.selectedChar.col] = row1Arr[val.col];
+    row1Arr[val.col] = letter2;
+
+    this.addRowToQuizz(row1Arr.join(''), val.row);
+    this.addRowToQuizz(row2Arr.join(''), this.selectedChar.row);
+
+    this.userNumbers[val.row] = row1Arr.join('');
+    this.userNumbers[this.selectedChar.row] = row2Arr.join('');
+    this.selectedChar = null;
+    this.localStorage.addBoard(this.userNumbers);
+  }
+
+  timeOut() {
+    this.finish = true;
+    this.running = false;
+    clearInterval(this.timerRef);
+    this.localStorage.setRemainingTime(0);
+    this.counter.setMinutes(0);
+    this.counter.setSeconds(0);
+    this.info();
+  }
+
+  startTimer() {
+    let remaining = this.localStorage.getRemainingTime();
+    this.counter = new Date(this.counter.getTime() + remaining);
+    this.timerRef = setInterval(() => {
+      if(this.counter.getMinutes() > 50) {
+        this.timeOut();
+      }
+      this.counter = new Date(this.counter.getTime() - millisecondsOnOneSecond);
+      remaining -= millisecondsOnOneSecond;
+      this.localStorage.setRemainingTime(remaining);
+    }, millisecondsOnOneSecond);
   }
 }

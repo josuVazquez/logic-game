@@ -1,10 +1,10 @@
 export class QuizzInfo {
     date: Date;
     nextDate: Date;
-    code: string;
+    codes: Array<string>;
     constructor(data: Partial<QuizzInfo> = {}) {
         this.date = data.date || null;
         this.nextDate = data.nextDate || null;
-        this.code = data.code || '';
+        this.codes = data.codes || [];
     }
 }

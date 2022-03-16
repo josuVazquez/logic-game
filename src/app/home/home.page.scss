@@ -18,6 +18,7 @@
   border-collapse: separate;
   border-spacing: 5px 5px;
   margin-top: auto;
+  margin-bottom: auto;
   tr {
     padding: 5px;
 
@@ -133,16 +134,90 @@
 .checked {
   background-color: var(--ion-color-success) !important;
   color: var(--ion-color-success-contrast) !important;
-  border: 2 solid var(--ion-color-success) !important;
+  border: 2px solid var(--ion-color-success) !important;
 }
 
 .warn {
   color: var(--ion-color-warning-contrast);
   background-color: var(--ion-color-warning);
-  border: 2 solid var(--ion-color-warning);
+  border: 2px solid var(--ion-color-warning);
+}
+
+.selected {
+  background-color: var(--ion-color-danger-shade) !important;
+  border: 2px solid var(--ion-color-danger-shade) !important;
+  @extend .allEffect;
 }
 
 .allEffect {
   animation-name: appear;
   animation-duration: 0.5s;
+}
+
+
+@keyframes rotate {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+	position: relative;
+	z-index: 0;
+	width: 120px;
+	height: 120px;
+	font-size: xx-large;
+	@include small {
+		width: 90px;
+		height: 90px;
+		font-size: x-large;
+	}
+	border-radius: 50%;
+	overflow: hidden;
+	padding: 2rem;
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+    align-items: center;
+
+	div {
+		position: absolute;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: -2;
+		left: -50%;
+		top: -50%;
+		width: 200%;
+		height: 200%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-size: 50% 50%, 50% 50%;
+		background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+        
+        background-image: linear-gradient(rgb(133, 98, 203), rgb(103, 58, 183)), 
+            linear-gradient(rgb(103, 58, 183), rgb(143, 128, 213)),
+            linear-gradient(rgb(153, 138, 223), rgb(193, 178, 243)), 
+            linear-gradient(rgb(250,250,250), rgb(103, 58, 183));
+	}
+	
+	&::after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		left: 6px;
+		top: 6px;
+		width: calc(100% - 12px);
+		height: calc(100% - 12px);
+		background: var(--ion-color-secondary-contrast);
+		border-radius: 50%;
+	}
+}
+
+.rotating {
+	&::before {
+        animation: rotate 3s linear infinite;
+	}
 }

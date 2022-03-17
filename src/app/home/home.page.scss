@@ -47,20 +47,16 @@
   font-weight: bold;
 }
 
-.valueCircle {
-  border-radius: 50%;
+.value:hover {
+  cursor:default;
 }
 
-.circleInput {
-  border-width: 0px;
-  min-width: 100%;
-  max-width: 100%;
-  background-color: var(--ion-color-primary);
-  text-align: center;
-  text-transform: capitalize;
-  &:focus {
-    outline: none;
-  }
+.running:hover {
+  cursor: pointer;
+}
+
+.valueCircle {
+  border-radius: 50%;
 }
 
 .keybord {
@@ -146,10 +142,9 @@
 .selected {
   background-color: var(--ion-color-danger-shade) !important;
   border: 2px solid var(--ion-color-danger-shade) !important;
-  @extend .allEffect;
 }
 
-.allEffect {
+.effect {
   animation-name: appear;
   animation-duration: 0.5s;
 }

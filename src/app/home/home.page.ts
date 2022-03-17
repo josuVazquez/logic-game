@@ -23,9 +23,11 @@ export class HomePage {
   finish = false;
   modalOpen = false;
   selectedChar: any;
+  auxSelectedChar: any;
   counter: Date = new Date();
   timerRef: any;
   running = false;
+  secondSelect = null;
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -151,17 +153,23 @@ export class HomePage {
   }
 
   select(val) {
-    if(this.finish) {
+    if(!this.running || this.selectedChar && this.secondSelect) {
       return;
     } else if(!this.selectedChar) {
       this.selectedChar = { ...val };
+      this.auxSelectedChar = { ...val };
       return;
     } else if( val.col === this.selectedChar.col && val.row === this.selectedChar.row) {
       this.selectedChar = null;
+      this.auxSelectedChar = null;
       return;
     }
-
+    this.secondSelect = {...val};
     this.changePositions(val);
+    setTimeout(() => {
+      this.auxSelectedChar = null;
+      this.secondSelect = null;
+    }, 500);
   }
 
   changePositions(val: any) {

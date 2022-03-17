@@ -21,11 +21,14 @@
 
     <table class="table">
       <tr *ngFor="let row of quizz.rows; let index = index"> 
-        <td *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle border fillBackGround" (click)="select({col:i, row: index, val: rowValue.value})"
-          [ngClass]="{ 
+        <td 
+          *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle border fillBackGround" (click)="select({col:i, row: index, val: rowValue.value})"
+          [ngClass]="{
+            running: running,
             checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
             warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
-            selected: selectedChar && selectedChar.row === index && selectedChar.col === i
+            selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
+            effect: auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i)
           }" >
           {{rowValue.value}}
         </td>

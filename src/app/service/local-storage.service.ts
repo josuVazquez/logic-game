@@ -85,7 +85,7 @@ export class LocalStorageService {
 
   getTodaysQuery() {
     const quizz = this.getQuizz();
-    if(!quizz || new Date() > new Date( quizz.date.getTime() + millisecondsOnADay)) {
+    if(!quizz || this.getNowUTC() > quizz.nextDate) {
       this.http.get(this.backEnd).subscribe( (res: any) => {
         this.resetQuizz();
         this.setQuizz(res);
@@ -96,5 +96,10 @@ export class LocalStorageService {
     } else {
       this.newQuizz$.next(new QuizzInfo(quizz));
     }
+  }
+
+  public getNowUTC() {
+    const now = new Date();
+    return new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
   }
 }

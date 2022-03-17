@@ -28,6 +28,8 @@ export class HomePage {
   timerRef: any;
   running = false;
   secondSelect = null;
+  completedRow = [];
+
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -58,6 +60,10 @@ export class HomePage {
   }
 
   start() {
+    if(this.running) {
+      return;
+    }
+
     this.running = true;
     this.userNumbers = [...this.numbersOfTheDay];
     this.loadTodaysBoard();
@@ -153,7 +159,7 @@ export class HomePage {
   }
 
   select(val) {
-    if(!this.running || this.selectedChar && this.secondSelect) {
+    if(!this.running || (this.selectedChar && this.secondSelect) || this.completedRow.includes(val.row)) {
       return;
     } else if(!this.selectedChar) {
       this.selectedChar = { ...val };
@@ -166,6 +172,7 @@ export class HomePage {
     }
     this.secondSelect = {...val};
     this.changePositions(val);
+    this.selectedChar = null;
     setTimeout(() => {
       this.auxSelectedChar = null;
       this.secondSelect = null;
@@ -191,8 +198,14 @@ export class HomePage {
 
     this.userNumbers[val.row] = row1Arr.join('');
     this.userNumbers[this.selectedChar.row] = row2Arr.join('');
-    this.selectedChar = null;
     this.localStorage.addBoard(this.userNumbers);
+
+    if(this.quizz.rowCorrect(val.row)) {
+      this.completedRow.push(val.row);
+    }
+    if(this.quizz.rowCorrect(this.selectedChar.row)) {
+      this.completedRow.push(this.selectedChar.row);
+    }
 
     if(this.quizz.numCorrectRows().length === 7) {
       this.timeOut();
@@ -214,12 +227,12 @@ export class HomePage {
     let remaining = this.localStorage.getRemainingTime();
     this.counter = new Date(this.counter.getTime() + remaining);
     this.timerRef = setInterval(() => {
-      if(this.counter.getMinutes() > 50) {
-        this.timeOut();
-      }
       this.counter = new Date(this.counter.getTime() - millisecondsOnOneSecond);
       remaining -= millisecondsOnOneSecond;
       this.localStorage.setRemainingTime(remaining);
+      if(this.counter.getMinutes() > 50) {
+        this.timeOut();
+      }
     }, millisecondsOnOneSecond);
   }
 }

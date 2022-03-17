@@ -4,7 +4,7 @@
   <button (click)="explain()" class="help">
     <ion-icon name="help-circle-outline"></ion-icon>
   </button>
-  <h3 class="title">NotEvenWords</h3>
+  <h3 class="title">CodeBreaker</h3>
   <button fill="clear" (click)="info()" class="help">
     <ion-icon name="stats-chart-outline"></ion-icon>
   </button>
@@ -13,27 +13,36 @@
   </button>
 </ion-header>
 
-  <div class="content">
-    <article class="spinner" [ngClass]="{'rotating': running}">
-      <div>{{ counter | date:'mm:ss' }}</div>
-    </article>
-    <ion-button *ngIf="!running" (click)="start()">Start</ion-button>
-
-    <table class="table">
-      <tr *ngFor="let row of quizz.rows; let index = index"> 
-        <td 
-          *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle border fillBackGround" (click)="select({col:i, row: index, val: rowValue.value})"
-          [ngClass]="{
-            running: running,
-            checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
-            warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
-            selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
-            effect: auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i)
-          }" >
-          {{rowValue.value}}
-        </td>
-      </tr>
-    </table>
-
+<div class="content"> 
+  <div class="watch">
+    <div class="spinner" [ngClass]="{'rotating': running}" (click)="start()">
+      <p *ngIf="!running">START</p>
+      <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
+    </div>
   </div>
+  <table class="table">
+    <tr *ngFor="let row of quizz.rows; let index = index"> 
+      <td 
+        *ngFor="let rowValue of row.cells; let i = index" class="value valueCircle border fillBackGround" (click)="select({col:i, row: index, val: rowValue.value})"
+        [ngClass]="{
+          running: running,
+          checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
+          warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
+          selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
+          effect: (auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i))
+            || completedRow.includes(index)
+        }" >
+        {{rowValue.value}}
+      </td>
+      <td class="value valueCircle border locked"
+        [ngClass]="{
+          checked: completedRow.includes(index)
+        }">
+        <ion-icon *ngIf="completedRow.includes(index)" name="lock-closed-outline"></ion-icon>
+        <ion-icon *ngIf="!completedRow.includes(index)" name="lock-open-outline"></ion-icon>
+      </td>
+    </tr>
+  </table>
+
+</div>
 </ion-content>

@@ -2,8 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 
-const millisecondsOnADay = 86400000;
-
 @Component({
   selector: 'app-info-modal',
   templateUrl: './info-modal.component.html',
@@ -28,12 +26,10 @@ export class InfoModalComponent implements OnDestroy {
     this.setTimer();
 
     this.stats = this.localStorage.getStadistics();
-    console.log(this.stats);
     this.played = this.stats.length;
     this.won = this.stats.filter( p => p <= 5).length;
 
     this.percentage = this.percentage.map( per => ({num: per, progress: [...this.progress(per)]}) );
-    console.log(this.percentage);
   }
 
   ngOnDestroy(): void {
@@ -45,7 +41,6 @@ export class InfoModalComponent implements OnDestroy {
   }
 
   progress(pos: number) {
-    console.log(this.stats);
     const num = Math.round(this.stats.filter( p => p === pos).length / this.stats.length * 10) || 0;
     return Array(num).keys();
   }

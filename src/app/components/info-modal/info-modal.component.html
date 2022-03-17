@@ -11,7 +11,7 @@
       <div>
         <p>Porcentaje</p>
         <div *ngFor="let stat of percentage" class="progress">
-          {{stat.num + 1 === 8 ? 'X' : stat.num + 1}}
+          {{stat.num === 0 ? 'X' : stat.num}}
           <div *ngFor="let box of stat.progress" class="box">
           </div>
             ({{stat.progress.length * 10}})%

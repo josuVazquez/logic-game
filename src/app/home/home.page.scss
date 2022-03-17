@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: calc(100vh - 52.391px);
 }
 
@@ -17,12 +18,14 @@
   padding: 5px;
   border-collapse: separate;
   border-spacing: 5px 5px;
-  margin-top: auto;
-  margin-bottom: auto;
   tr {
     padding: 5px;
 
   }
+}
+
+.watch {
+  justify-self: flex-start;
 }
 
 .value {
@@ -144,6 +147,11 @@
   border: 2px solid var(--ion-color-danger-shade) !important;
 }
 
+.locked {
+  background-color: var(--ion-color-danger-shade);
+  border: 2px solid var(--ion-color-danger-shade);
+}
+
 .effect {
   animation-name: appear;
   animation-duration: 0.5s;
@@ -162,18 +170,25 @@
 	width: 120px;
 	height: 120px;
 	font-size: xx-large;
+  font-weight: bold;
 	@include small {
 		width: 90px;
 		height: 90px;
 		font-size: x-large;
 	}
+  p {
+    font-size: x-large;
+    @include small {
+      font-size: large;
+    }
+  }
 	border-radius: 50%;
 	overflow: hidden;
 	padding: 2rem;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 	justify-content: center;
-    align-items: center;
+  align-items: center;
 
 	div {
 		position: absolute;

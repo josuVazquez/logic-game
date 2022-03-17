@@ -15,6 +15,9 @@ export class Quizz {
         this.rows[row].info = new RowInfo(rowInfo);
     }
 
+    rowCorrect(row) {
+        return this.rows[row].info.numPositionCorrect === 7;
+    }
 
     numCorrectRows() {
         return this.rows.filter( row => row.info.numPositionCorrect === 7);
@@ -23,15 +26,6 @@ export class Quizz {
     cleanRow(row) {
         this.rows[row].cells.forEach( r => {
             r.value = '';
-        });
-    }
-
-    clearCheck() {
-        this.rows.forEach(row => {
-            row.cells.forEach(val => {
-                val.discardCheck = false;
-                val.okayCheck = false;
-            });
         });
     }
 }

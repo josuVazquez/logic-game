@@ -1,24 +1,24 @@
-<ion-content>
+<ion-content fullscreen="true">
 
-<ion-header class="header">
-  <button (click)="explain()" class="help">
+<ion-header class="header" translucent="true">
+  <ion-button fill="clear" (click)="explain()" class="icon-font">
     <ion-icon name="help-circle-outline"></ion-icon>
-  </button>
-  <h3 class="title">{{ 'HOME.title' | translate }}</h3>
-  <button fill="clear" (click)="info()" class="help">
-    <ion-icon name="stats-chart-outline"></ion-icon>
-  </button>
-  <button fill="clear" (click)="settings()" class="help">
-    <ion-icon name="settings-outline"></ion-icon>
-  </button>
+  </ion-button>
+  <ion-title class="title ion-text-center">{{ 'HOME.title' | translate }}</ion-title>
+  <div class="right">
+    <ion-button fill="clear" (click)="info()" class="icon-font">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" (click)="settings()" class="icon-font">
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-button>
+  </div>
 </ion-header>
 
 <div class="content"> 
-  <div class="watch">
-    <div class="spinner" [ngClass]="{'rotating': running}" (click)="start()">
-      <p *ngIf="!running">{{ "HOME.START" | translate }}</p>
-      <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
-    </div>
+  <div class="spinner" [ngClass]="{'rotating': running}" (click)="start()">
+    <p *ngIf="!running">{{ "HOME.START" | translate }}</p>
+    <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
   </div>
   <table class="table">
     <tr *ngFor="let row of quizz.rows; let index = index"> 

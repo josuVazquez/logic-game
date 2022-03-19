@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 52.391px);
+  height: calc(100% - 52.391px);
 }
 
 .table {
@@ -22,10 +22,6 @@
     padding: 5px;
 
   }
-}
-
-.watch {
-  justify-self: flex-start;
 }
 
 .value {
@@ -99,26 +95,26 @@
 }
 
 .header {
+  max-height: 52.391px;
+  width: 100%;
   display: flex;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  
-  @include notSmall {
-    gap: 1.5rem;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
-  }
+  flex-direction: row;
 }
 
 .title {
-  margin-left: auto;
-  margin-right: auto;
+  align-self: center;
   font-weight: bold;
 }
 
-.help {
-  font-size: xx-large;
-  background-color: transparent;
+.right {
+  margin-left: auto;
+}
+
+.icon-font {
+  font-size: x-large;
+  @include small {
+    font-size: large;
+  }
   color: var(--ion-color-primary-shade);
 }
 
@@ -162,7 +158,8 @@
 }
 
 .effect {
-  @include effectDelay(0s);
+  animation-name: appear;
+  animation-duration: 0.5s;
 }
 
 .effectDelay {
@@ -206,13 +203,9 @@
 .spinner {
 	position: relative;
 	z-index: 0;
-	width: 120px;
-	height: 120px;
 	font-size: xx-large;
   font-weight: bold;
 	@include small {
-		width: 90px;
-		height: 90px;
 		font-size: x-large;
 	}
   p {
@@ -221,52 +214,5 @@
       font-size: large;
     }
   }
-	border-radius: 50%;
-	overflow: hidden;
-	padding: 2rem;
-  display: flex;
-  flex-direction: column;
-	justify-content: center;
-  align-items: center;
 
-	div {
-		position: absolute;
-	}
-
-	&::before {
-		content: '';
-		position: absolute;
-		z-index: -2;
-		left: -50%;
-		top: -50%;
-		width: 200%;
-		height: 200%;
-		background-color: transparent;
-		background-repeat: no-repeat;
-		background-size: 50% 50%, 50% 50%;
-		background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-        
-        background-image: linear-gradient(rgb(133, 98, 203), rgb(103, 58, 183)), 
-            linear-gradient(rgb(103, 58, 183), rgb(143, 128, 213)),
-            linear-gradient(rgb(153, 138, 223), rgb(193, 178, 243)), 
-            linear-gradient(rgb(250,250,250), rgb(103, 58, 183));
-	}
-	
-	&::after {
-		content: '';
-		position: absolute;
-		z-index: -1;
-		left: 6px;
-		top: 6px;
-		width: calc(100% - 12px);
-		height: calc(100% - 12px);
-		background: var(--ion-color-secondary-contrast);
-		border-radius: 50%;
-	}
-}
-
-.rotating {
-	&::before {
-        animation: rotate 3s linear infinite;
-	}
 }

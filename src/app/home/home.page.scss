@@ -152,11 +152,50 @@
   border: 2px solid var(--ion-color-danger-shade);
 }
 
-.effect {
+@mixin effectDelay($delay) {
   animation-name: appear;
   animation-duration: 0.5s;
+
+  -webkit-animation-delay: $delay;
+  -o-animation-delay: $delay;
+  animation-delay: $delay;
 }
 
+.effect {
+  @include effectDelay(0s);
+}
+
+.effectDelay {
+  @include effectDelay(0s);
+}
+
+.effectDelay1 {
+  @include effectDelay(0.15s);
+}
+
+.effectDelay2 {
+  @include effectDelay(0.3s);
+}
+
+
+.effectDelay3 {
+  @include effectDelay(0.45s);
+}
+
+
+.effectDelay4 {
+  @include effectDelay(0.60s);
+}
+
+
+.effectDelay5 {
+  @include effectDelay(0.75s);
+}
+
+
+.effectDelay6 {
+  @include effectDelay(0.9s);
+}
 
 @keyframes rotate {
 	100% {

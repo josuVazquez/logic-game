@@ -2,18 +2,17 @@
     <ion-button fill="clear" class="top-right" (click)="closeModal()">
         <ion-icon name="close-outline"></ion-icon>
     </ion-button>
-    <h3 class="title">COMO JUGAR</h3>
+    <h3 class="title">{{'help.title' | translate}}</h3>
     <article>
-        <p>Adivina los siete codigos ocultos antes de que se acabe el tiempo.</p>
+        <p>{{'help.firstText' | translate}}</p>
 
         <p>
-            Pulsando encima de cada numero podras seleccionar e intercambiar la posicion de los numeros.
-            Después de cada intento el color de los numeros cambia para mostrar qué tan cerca estás de acertar la conmbinacion.
+            {{'help.secondText' | translate}}
         </p>
 
-        <p>Ejemplo</p>
+        <p>{{'help.example' | translate}}</p>
 
-        <p>El numero 4 esta en la combinacion y en posicion correcta</p>
+        <p>{{'help.firstExample' | translate}}</p>
         <table class="table">
         <tr>
             <td class="value valueCircle" >
@@ -40,7 +39,7 @@
         </tr>
         </table>
 
-        <p>El numero 1 esta en la combinacion pero no esta en la posicion correcta.</p>
+        <p>{{'help.secondExample' | translate}}</p>
 
         <table class="table">
             <tr>
@@ -68,7 +67,7 @@
             </tr>
         </table>
 
-        <p>El numero 2 no esta en la conmbinacion.</p>
+        <p>{{'help.thirdExample' | translate}}</p>
 
         <table class="table">
             <tr>
@@ -95,7 +94,6 @@
                 </td>
             </tr>
         </table>
-        <p>Pulsa <b>START</b> para empezar a jugar. ¡Cuidado! una vez empieces no podras parar el tiempo.</p>
-
+        <p>{{'help.lastText' | translate}}</p>
     </article>
 </ion-content>

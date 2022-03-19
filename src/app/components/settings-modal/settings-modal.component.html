@@ -2,11 +2,11 @@
   <ion-button fill="clear" class="top-right" (click)="closeModal()">
       <ion-icon name="close-outline"></ion-icon>
   </ion-button>
-  <h3 class="title">SETTINGS</h3>
+  <h3 class="title">{{'settings.title' | translate}}</h3>
   <article>
     <ion-item>
       <ion-icon slot="start" name="moon"></ion-icon>
-      <ion-label>Modo oscuro</ion-label>
+      <ion-label>{{'settings.darkMode' | translate}}</ion-label>
       <ion-toggle slot="end" name="oscuro" color="secondary" [(ngModel)]="darkMode" (ionChange)="darkModeToggle()" ></ion-toggle>
     </ion-item>
   </article>

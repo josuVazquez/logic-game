@@ -19,7 +19,9 @@ export class AppComponent {
   private localStorage: LocalStorageService,
   private pushNotification: PushNotificationsService,
   private translate: TranslateService ) {
-    translate.setDefaultLang(translate.currentLang);
+    const defaultLanguage = translate.getBrowserLang();
+    translate.setDefaultLang(defaultLanguage);
+    translate.use(defaultLanguage);
     const darkMode = this.localStorage.getDarkMode();
     document.body.classList.toggle('dark', darkMode);
     this.localStorage.getTodaysQuery();

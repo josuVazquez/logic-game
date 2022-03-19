@@ -2,14 +2,14 @@
   <ion-button fill="clear" class="top-right" (click)="closeModal()">
       <ion-icon name="close-outline"></ion-icon>
   </ion-button>
-  <h3 class="title">INFO</h3>
+  <h3 class="title">{{'info.title' | translate}}</h3>
   <article>
     <div class="stadistics">
-      <p>Estadisticas</p>
-      <p>Jugadas: {{played}}</p>
-      <p>Victorias: {{won}}</p>
+      <p>{{'info.stats' | translate}}</p>
+      <p>{{'info.games' | translate}} {{played}}</p>
+      <p>{{'info.wins' | translate}} {{won}}</p>
       <div>
-        <p>Porcentaje</p>
+        <p>{{'info.percentage' | translate}}</p>
         <div *ngFor="let stat of percentage" class="progress">
           {{stat.num === 0 ? 'X' : stat.num}}
           <div *ngFor="let box of stat.progress" class="box">
@@ -20,7 +20,7 @@
     </div>
     <hr/>
     <div class="timer">
-      <p>SIGUIENTE COMBINACION</p>
+      <p>{{'info.nextCombination' | translate}}</p>
       {{timerDate | date: 'HH:mm:ss'}}
     </div>
   </article>

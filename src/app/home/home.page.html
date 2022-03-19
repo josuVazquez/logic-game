@@ -4,7 +4,7 @@
   <button (click)="explain()" class="help">
     <ion-icon name="help-circle-outline"></ion-icon>
   </button>
-  <h3 class="title">CodeBreaker</h3>
+  <h3 class="title">{{ 'HOME.title' | translate }}</h3>
   <button fill="clear" (click)="info()" class="help">
     <ion-icon name="stats-chart-outline"></ion-icon>
   </button>
@@ -16,7 +16,7 @@
 <div class="content"> 
   <div class="watch">
     <div class="spinner" [ngClass]="{'rotating': running}" (click)="start()">
-      <p *ngIf="!running">START</p>
+      <p *ngIf="!running">{{ "HOME.START" | translate }}</p>
       <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
     </div>
   </div>
@@ -29,17 +29,16 @@
           checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
           warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
           selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
-          effect: (auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i))
-            || completedRow.includes(index)
+          effect: (auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i)),
+          effectDelay: completedRow.includes(index) && i === 0,
+          effectDelay1: completedRow.includes(index) && i === 1,
+          effectDelay2: completedRow.includes(index) && i === 2,
+          effectDelay3: completedRow.includes(index) && i === 3,
+          effectDelay4: completedRow.includes(index) && i === 4,
+          effectDelay5: completedRow.includes(index) && i === 5,
+          effectDelay6: completedRow.includes(index) && i === 6
         }" >
         {{rowValue.value}}
-      </td>
-      <td class="value valueCircle border locked"
-        [ngClass]="{
-          checked: completedRow.includes(index)
-        }">
-        <ion-icon *ngIf="completedRow.includes(index)" name="lock-closed-outline"></ion-icon>
-        <ion-icon *ngIf="!completedRow.includes(index)" name="lock-open-outline"></ion-icon>
       </td>
     </tr>
   </table>

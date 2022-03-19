@@ -1,0 +1,28 @@
+{
+    "HOME": {
+        "title": "CodeBreaker",
+        "START": "START"
+    },
+    "info": {
+        "title": "INFO",
+        "stats": "Estadisticas",
+        "games": "Nº Partidas jugadas: ",
+        "wins": "Nº Victorias: ",
+        "percentage": "Porcentage: ",
+        "nextCombination": "PROXIMA COMBINACION"
+    },
+    "help": {
+        "title": "COMO JUGAR",
+        "firstText": "Adivina los siete codigos ocultos antes de que se acabe el tiempo.",
+        "secondText": "Pulsando encima de cada numero podras seleccionar e intercambiar la posicion de los numeros. Después de cada intento el color de los numeros cambia para mostrar qué tan cerca estás de acertar la conmbinacion.",
+        "example": "Ejemplo",
+        "firstExample": "El numero 4 esta en la combinacion y en posicion correcta",
+        "secondExample": "El numero 1 esta en la combinacion pero no esta en la posicion correcta.",
+        "thirdExample": "El numero 2 no esta en la conmbinacion.",
+        "lastText": "Pulsa <b>START</b> para empezar a jugar. ¡Cuidado! una vez empieces no podras parar el tiempo."
+    },
+    "settings": {
+        "title": "CONFIGURACION",
+        "darkMode": "Modo oscuro"
+    }
+}

@@ -19,9 +19,19 @@
       </div>
     </div>
     <hr/>
+    <ion-fab class="share">
+      <ion-fab-button class="twitter">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="what">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
     <div class="timer">
       <p>{{'info.nextCombination' | translate}}</p>
       {{timerDate | date: 'HH:mm:ss'}}
     </div>
+
   </article>
 </ion-content>

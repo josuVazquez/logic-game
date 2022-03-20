@@ -29,14 +29,7 @@
           checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
           warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
           selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
-          effect: (auxSelectedChar && secondSelect && (auxSelectedChar.row === index && auxSelectedChar.col === i || secondSelect.row === index && secondSelect.col === i)),
-          effectDelay: completedRow.includes(index) && i === 0,
-          effectDelay1: completedRow.includes(index) && i === 1,
-          effectDelay2: completedRow.includes(index) && i === 2,
-          effectDelay3: completedRow.includes(index) && i === 3,
-          effectDelay4: completedRow.includes(index) && i === 4,
-          effectDelay5: completedRow.includes(index) && i === 5,
-          effectDelay6: completedRow.includes(index) && i === 6
+          effect: completedRow.includes(index)
         }" >
         {{rowValue.value}}
       </td>

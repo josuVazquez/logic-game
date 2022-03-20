@@ -1,6 +1,7 @@
 @import "/src/utils/mixin.scss";
 @import "/src/theme/variables.scss";
 
+
 @keyframes appear {
   from {transform: scaleY(0);}
   to {transform: scaleY(1);}
@@ -96,7 +97,9 @@
 
 .header {
   max-height: 52.391px;
-  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
 }
@@ -112,8 +115,11 @@
 
 .icon-font {
   font-size: x-large;
-  @include small {
+  @include medium {
     font-size: large;
+  }
+  @include small {
+    font-size: medium;
   }
   color: var(--ion-color-primary-shade);
 }
@@ -148,56 +154,9 @@
   border: 2px solid var(--ion-color-danger-shade);
 }
 
-@mixin effectDelay($delay) {
-  animation-name: appear;
-  animation-duration: 0.5s;
-
-  -webkit-animation-delay: $delay;
-  -o-animation-delay: $delay;
-  animation-delay: $delay;
-}
-
 .effect {
   animation-name: appear;
-  animation-duration: 0.5s;
-}
-
-.effectDelay {
-  @include effectDelay(0s);
-}
-
-.effectDelay1 {
-  @include effectDelay(0.15s);
-}
-
-.effectDelay2 {
-  @include effectDelay(0.3s);
-}
-
-
-.effectDelay3 {
-  @include effectDelay(0.45s);
-}
-
-
-.effectDelay4 {
-  @include effectDelay(0.60s);
-}
-
-
-.effectDelay5 {
-  @include effectDelay(0.75s);
-}
-
-
-.effectDelay6 {
-  @include effectDelay(0.9s);
-}
-
-@keyframes rotate {
-	100% {
-		transform: rotate(360deg);
-	}
+  animation-duration: 0.3s;
 }
 
 .spinner {

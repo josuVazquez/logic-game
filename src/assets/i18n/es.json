@@ -1,25 +1,25 @@
 {
     "HOME": {
-        "title": "CodeBreaker",
+        "title": "CODEBREAKER",
         "START": "START"
     },
     "info": {
         "title": "INFO",
-        "stats": "Estadisticas",
-        "games": "Nº Partidas jugadas: ",
-        "wins": "Nº Victorias: ",
+        "stats": "Estadísticas",
+        "games": "Partidas jugadas: ",
+        "wins": "Victorias: ",
         "percentage": "Porcentage: ",
-        "nextCombination": "PROXIMA COMBINACION"
+        "nextCombination": "PROXIMA COMBINACIÓN"
     },
     "help": {
         "title": "COMO JUGAR",
-        "firstText": "Adivina los siete codigos ocultos antes de que se acabe el tiempo.",
-        "secondText": "Pulsando encima de cada numero podras seleccionar e intercambiar la posicion de los numeros. Después de cada intento el color de los numeros cambia para mostrar qué tan cerca estás de acertar la conmbinacion.",
+        "firstText": "Adivina los siete códigos ocultos antes de que se acabe el tiempo.",
+        "secondText": "Pulsando encima de cada número podrás seleccionar e intercambiar la posición de los numeros. Después de cada intento el color de los números cambia para mostrar qué tan cerca estás de acertar la conmbinación.",
         "example": "Ejemplo",
-        "firstExample": "El numero 4 esta en la combinacion y en posicion correcta",
-        "secondExample": "El numero 1 esta en la combinacion pero no esta en la posicion correcta.",
-        "thirdExample": "El numero 2 no esta en la conmbinacion.",
-        "lastText": "Pulsa <b>START</b> para empezar a jugar. ¡Cuidado! una vez empieces no podras parar el tiempo."
+        "firstExample": "El numero 4 esta en la conmbinación y en posición correcta",
+        "secondExample": "El numero 1 esta en la conmbinación pero no esta en la posición correcta.",
+        "thirdExample": "El numero 2 no esta en la conmbinación.",
+        "lastText": "Pulsa START para empezar a jugar. ¡Cuidado! Una vez empieces no podrás parar el tiempo."
     },
     "settings": {
         "title": "CONFIGURACION",

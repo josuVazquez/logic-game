@@ -9,6 +9,7 @@ import { LocalStorageService } from '../service/local-storage.service';
 const millisecondsOnOneSecond = 1000;
 const millisecondsOnFiveMinutes = 300000;
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -23,13 +24,11 @@ export class HomePage {
   finish = false;
   modalOpen = false;
   selectedChar: any;
-  auxSelectedChar: any;
   counter: Date = new Date();
   timerRef: any;
   running = false;
-  secondSelect = null;
   completedRow = [];
-
+  moverChars = [];
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -53,7 +52,7 @@ export class HomePage {
       this.numbersOfTheDay = quizz.codes;
       this.currentDate = quizz.date;
 
-      if(this.localStorage.getRemainingTime() < millisecondsOnFiveMinutes) {
+      if(this.localStorage.getRemainingTime() > 0) {
         this.start();
       }
     });
@@ -101,7 +100,11 @@ export class HomePage {
 
     rows.forEach( (row, index) => {
       this.addRowToQuizz(row, index);
+      if(this.quizz.rowCorrect(index)) {
+        this.completedRow.push(index);
+      }
     });
+
   }
 
   endToday() {
@@ -138,44 +141,44 @@ export class HomePage {
   }
 
   info() {
-    this.openModal(InfoModalComponent);
+    this.openModal(InfoModalComponent, 'info');
   }
 
   settings() {
     this.openModal(SettingsModalComponent);
   }
 
-  async openModal(com) {
+  async openModal(com, css = '') {
     if(this.modalOpen) {
       return;
     }
 
     this.modalOpen = true;
     const modal = await this.modalController.create({
-      component: com
+      component: com,
+      cssClass: css
     });
     await modal.present();
     this.modalOpen = false;
   }
 
   select(val) {
-    if(!this.running || (this.selectedChar && this.secondSelect) || this.completedRow.includes(val.row)) {
+    if(!this.running || this.completedRow.includes(val.row)) {
       return;
     } else if(!this.selectedChar) {
       this.selectedChar = { ...val };
-      this.auxSelectedChar = { ...val };
       return;
     } else if( val.col === this.selectedChar.col && val.row === this.selectedChar.row) {
       this.selectedChar = null;
-      this.auxSelectedChar = null;
       return;
     }
-    this.secondSelect = {...val};
+    this.moverChars.push(val);
+    this.moverChars.push(this.selectedChar);
     this.changePositions(val);
     this.selectedChar = null;
     setTimeout(() => {
-      this.auxSelectedChar = null;
-      this.secondSelect = null;
+      this.moverChars.shift();
+      this.moverChars.shift();
     }, 500);
   }
 

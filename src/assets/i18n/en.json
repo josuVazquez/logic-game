@@ -1,6 +1,6 @@
 {
     "HOME": {
-        "title": "CodeBreaker",
+        "title": "CODEBREAKER",
         "START": "START"
     },
     "info": {
@@ -19,7 +19,7 @@
         "firstExample": "The number 4 apears on the combination o the right position",
         "secondExample": "The number 1 apeats on the combination but is not on the right position.",
         "thirdExample": "The number 2 dosent apear on the combination.",
-        "lastText": "Press <b>START</b> to play the game. Carefull! Once you beging you wont be able to stop the timer."
+        "lastText": "Press START to play the game. Carefull! Once you beging you wont be able to stop the timer."
     },
     "settings": {
         "title": "SETTINGS",

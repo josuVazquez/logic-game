@@ -56,4 +56,8 @@ export class InfoModalComponent implements OnDestroy {
       this.timerDate = new Date(now.getTime() + millisecondsTillNextDate);
     }, 1000);
   }
+
+  share() {
+
+  }
 }

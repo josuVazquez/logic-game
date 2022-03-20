@@ -58,6 +58,6 @@ export class InfoModalComponent implements OnDestroy {
   }
 
   share() {
-
+    const text = 'https://api.whatsapp.com/send?text=Check out my stats : {{shareableUrl}}';
   }
 }

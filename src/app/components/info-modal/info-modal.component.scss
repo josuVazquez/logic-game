@@ -62,3 +62,11 @@ h3 {
     --background: #1DA1F2;
     --color: white;
 }
+
+.stats {
+    max-width: 260px;
+    width: 100%;
+    p {
+        text-align: center;
+    }
+}

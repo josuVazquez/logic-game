@@ -8,7 +8,7 @@
       <p>{{'info.stats' | translate}}</p>
       <p>{{'info.games' | translate}} {{played}}</p>
       <p>{{'info.wins' | translate}} {{won}}</p>
-      <div>
+      <div class="stats">
         <p>{{'info.percentage' | translate}}</p>
         <div *ngFor="let stat of percentage" class="progress">
           {{stat.num === 0 ? 'X' : stat.num}}

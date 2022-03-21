@@ -11,7 +11,8 @@
     "build-watch": "ng build --prod --watch",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -61,6 +62,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "sonar-scanner": "^3.1.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.4.4"
   }

@@ -7,7 +7,7 @@ export class Quizz {
         this.rows = data.rows;
     }
 
-    setUserValue(value, rowInfo = {}, row) {
+    setUserValue(value, row, rowInfo = {}) {
         this.cleanRow(row);
         [...value].forEach((char, index) => {
             this.rows[row].cells[index].value = char;

@@ -7,8 +7,6 @@ import { Quizz, Row, RowInfo } from '../quiz.class';
 import { LocalStorageService } from '../service/local-storage.service';
 
 const millisecondsOnOneSecond = 1000;
-const millisecondsOnFiveMinutes = 300000;
-
 
 @Component({
   selector: 'app-home',
@@ -115,7 +113,7 @@ export class HomePage {
 
   addRowToQuizz(row, index) {
     const rowInfo = this.setRowInfo(row, index);
-    this.quizz.setUserValue(row, rowInfo, index);
+    this.quizz.setUserValue(row, index, rowInfo);
   }
 
   setRowInfo(row, index) {

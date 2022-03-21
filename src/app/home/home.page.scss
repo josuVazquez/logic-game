@@ -102,11 +102,16 @@
   margin-right: auto;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .title {
   align-self: center;
   font-weight: bold;
+  @include small {
+    font-size: medium;
+    padding: 0;
+  }
 }
 
 .right {
@@ -120,6 +125,8 @@
   }
   @include small {
     font-size: medium;
+    --padding-start: 8px;
+    --padding-end: 8px;
   }
   color: var(--ion-color-primary-shade);
 }

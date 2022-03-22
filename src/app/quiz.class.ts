@@ -28,6 +28,11 @@ export class Quizz {
             r.value = '';
         });
     }
+
+    toggleCheckCell(row, column) {
+        const value = this.rows[row].cells[column];
+        value.selected = !value.selected;
+    }
 }
 
 export class Row {
@@ -54,13 +59,11 @@ export class Row {
 
 export class Cell {
     value: string;
-    okayCheck: boolean;
-    discardCheck: boolean;
+    selected: boolean;
 
     constructor(data: Partial<Cell> = {}) {
         this.value = data.value;
-        this.okayCheck = data.okayCheck || false;
-        this.discardCheck = data.discardCheck || false;
+        this.selected = data.selected || false;
     }
 }
 

@@ -22,11 +22,12 @@ export class HomePage {
   finish = false;
   modalOpen = false;
   selectedChar: any;
+  selectedCharAux: any;
+  auxChar: any;
   counter: Date = new Date();
   timerRef: any;
   running = false;
   completedRow = [];
-  moverChars = [];
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -164,20 +165,28 @@ export class HomePage {
     if(!this.running || this.completedRow.includes(val.row)) {
       return;
     } else if(!this.selectedChar) {
+      if(this.auxChar) {
+        this.unToggleLastValues();
+      }
       this.selectedChar = { ...val };
       return;
     } else if( val.col === this.selectedChar.col && val.row === this.selectedChar.row) {
       this.selectedChar = null;
       return;
     }
-    this.moverChars.push(val);
-    this.moverChars.push(this.selectedChar);
+    this.quizz.toggleCheckCell(val.row, val.col);
+    this.quizz.toggleCheckCell(this.selectedChar.row, this.selectedChar.col);
+
+    this.selectedCharAux = { ...this.selectedChar };
+    this.auxChar = val;
+
     this.changePositions(val);
     this.selectedChar = null;
-    setTimeout(() => {
-      this.moverChars.shift();
-      this.moverChars.shift();
-    }, 500);
+  }
+
+  unToggleLastValues() {
+      this.quizz.toggleCheckCell(this.auxChar.row, this.auxChar.col);
+      this.quizz.toggleCheckCell(this.selectedCharAux.row, this.selectedCharAux.col);
   }
 
   changePositions(val: any) {

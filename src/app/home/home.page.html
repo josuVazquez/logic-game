@@ -29,12 +29,19 @@
           checked: rowValue.value && rowValue.value === numbersOfTheDay[index].charAt(i),
           warn: rowValue.value && numbersOfTheDay[index].includes(rowValue.value),
           selected: selectedChar && selectedChar.row === index && selectedChar.col === i,
-          effect: completedRow.includes(index)
+          bounce1: completedRow.includes(index) && i === 0,
+          bounce2: completedRow.includes(index) && i === 1, 
+          bounce3: completedRow.includes(index) && i === 2,
+          bounce4: completedRow.includes(index) && i === 3,
+          bounce5: completedRow.includes(index) && i === 4,
+          bounce6: completedRow.includes(index) && i === 5,
+          bounce7: completedRow.includes(index) && i === 6,
+          effect: rowValue.selected
         }" >
         {{rowValue.value}}
       </td>
     </tr>
   </table>
-
+  <!-- this.moverChars.includes( v => v.row === row && v.col === col); -->
 </div>
 </ion-content>

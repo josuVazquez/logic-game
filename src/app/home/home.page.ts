@@ -28,6 +28,7 @@ export class HomePage {
   timerRef: any;
   running = false;
   completedRow = [];
+  disorderArray = [];
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -50,7 +51,7 @@ export class HomePage {
       }
       this.numbersOfTheDay = quizz.codes;
       this.currentDate = quizz.date;
-
+      this.disorderArray = quizz.disorderCodes;
       if(this.localStorage.getRemainingTime() > 0) {
         this.start();
       }
@@ -63,35 +64,15 @@ export class HomePage {
     }
 
     this.running = true;
-    this.userNumbers = [...this.numbersOfTheDay];
     this.loadTodaysBoard();
     this.localStorage.addBoard(this.userNumbers);
     this.startTimer();
   }
 
-  disorderArray(arr) {
-    const codes = arr.join('').split('');
-
-    let currentIndex = codes.length;
-    const res = [];
-
-    while (currentIndex !== 0) {
-      const randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [codes[currentIndex], codes[randomIndex]] = [
-        codes[randomIndex], codes[currentIndex]];
-    }
-    for(let i = 0; i < codes.length; i ++) {
-      const actualPosition = i * this.difficulty;
-      res.push(codes.slice(actualPosition, actualPosition + this.difficulty).join(''));
-    }
-    return res.filter( ar => ar);
-  }
-
   loadTodaysBoard() {
     let rows = this.localStorage.getBoard();
     if(!rows || !rows.length) {
-      this.userNumbers = this.disorderArray(this.userNumbers);
+      this.userNumbers = [...this.disorderArray];
       rows = [...this.userNumbers];
     } else {
       this.userNumbers = [...rows];

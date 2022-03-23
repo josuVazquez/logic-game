@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { QuizzInfo } from '../core/model/quiz-info.model';
 
 const millisecondsOnADay = 86400000;
-const millisecondsOnFiveMinutes = 300000;
+const millisecondsOnTwoMinitsAndHalf = 150000;
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +68,7 @@ export class LocalStorageService {
 
   resetQuizz() {
     localStorage.setItem('board', JSON.stringify([]));
-    localStorage.setItem('remaining', JSON.stringify(millisecondsOnFiveMinutes));
+    localStorage.setItem('remaining', JSON.stringify(millisecondsOnTwoMinitsAndHalf));
   }
 
   getBoard() {
@@ -80,7 +80,7 @@ export class LocalStorageService {
   }
 
   getRemainingTime() {
-    return JSON.parse(localStorage.getItem('remaining')) || millisecondsOnFiveMinutes;
+    return JSON.parse(localStorage.getItem('remaining')) || millisecondsOnTwoMinitsAndHalf;
   }
 
   getTodaysQuery() {

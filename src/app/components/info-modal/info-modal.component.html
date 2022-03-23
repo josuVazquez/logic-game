@@ -7,7 +7,6 @@
     <div class="stadistics">
       <p>{{'info.stats' | translate}}</p>
       <p>{{'info.games' | translate}} {{played}}</p>
-      <p>{{'info.wins' | translate}} {{won}}</p>
       <div class="stats">
         <p>{{'info.percentage' | translate}}</p>
         <div *ngFor="let stat of percentage" class="progress">
@@ -20,10 +19,7 @@
     </div>
     <hr/>
     <ion-fab class="share">
-      <ion-fab-button class="twitter" (click)="share()">
-        <ion-icon name="logo-twitter"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button class="what" (click)="share()">
+      <ion-fab-button class="what" (click)="shareWhat()">
         <ion-icon name="logo-whatsapp"></ion-icon>
       </ion-fab-button>
     </ion-fab>

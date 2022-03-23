@@ -16,7 +16,7 @@
 </ion-header>
 
 <div class="content"> 
-  <div class="spinner" [ngClass]="{'rotating': running}" (click)="start()">
+  <div class="spinner " [ngClass]="{'rotating': running, 'shaking': counter.getMinutes() < 1 && counter.getSeconds() < 30}" (click)="start()">
     <p *ngIf="!running">{{ "HOME.START" | translate }}</p>
     <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
   </div>
@@ -42,6 +42,5 @@
       </td>
     </tr>
   </table>
-  <!-- this.moverChars.includes( v => v.row === row && v.col === col); -->
 </div>
 </ion-content>

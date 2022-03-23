@@ -11,12 +11,12 @@ export class InfoModalComponent implements OnDestroy {
   time: string;
   stats = [];
   played = 0;
-  won = 0;
   percentage: any = [...Array(8).keys()];
   timerDate: Date;
   timerRef: any;
   nextQuizzDate: Date = new Date();
 
+  url = 'https://passcode-breaker.netlify.app';
   constructor(private modalController: ModalController,
     private localStorage: LocalStorageService) {
 
@@ -27,7 +27,6 @@ export class InfoModalComponent implements OnDestroy {
 
     this.stats = this.localStorage.getStadistics();
     this.played = this.stats.length;
-    this.won = this.stats.filter( p => p <= 5).length;
 
     this.percentage = this.percentage.map( per => ({num: per, progress: [...this.progress(per)]}) );
   }
@@ -57,7 +56,9 @@ export class InfoModalComponent implements OnDestroy {
     }, 1000);
   }
 
-  share() {
-    const text = 'https://api.whatsapp.com/send?text=Check out my stats : {{shareableUrl}}';
+  shareWhat() {
+    const text = `https://api.whatsapp.com/send?text=Try this game: ${this.url}`;
+    window.open(text, '_blank');
   }
+
 }

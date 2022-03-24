@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { identity } from 'rxjs';
 import { HelpModalComponent } from '../components/help-modal/help-modal.component';
 import { InfoModalComponent } from '../components/info-modal/info-modal.component';
 import { SettingsModalComponent } from '../components/settings-modal/settings-modal.component';
@@ -19,7 +20,6 @@ export class HomePage {
   numbersOfTheDay = [];
   userNumbers = [];
   currentDate: Date;
-  finish = false;
   modalOpen = false;
   selectedChar: any;
   selectedCharAux: any;
@@ -29,6 +29,7 @@ export class HomePage {
   running = false;
   completedRow = [];
   disorderArray = [];
+  remaining;
 
   constructor(private localStorage: LocalStorageService,
   private modalController: ModalController) {
@@ -46,20 +47,23 @@ export class HomePage {
     }
 
     this.localStorage.newQuizz$.subscribe( quizz => {
+      this.remaining = this.localStorage.getRemainingTime();
       if(!quizz.date) {
         return;
       }
       this.numbersOfTheDay = quizz.codes;
       this.currentDate = quizz.date;
       this.disorderArray = quizz.disorderCodes;
-      if(this.localStorage.getRemainingTime() > 0) {
+      if(this.remaining && this.remaining < 150000) {
         this.start();
+      } else if (this.remaining === 0){
+        this.loadTodaysBoard();
       }
     });
   }
 
   start() {
-    if(this.running) {
+    if(this.running || this.remaining < 1) {
       return;
     }
 
@@ -71,6 +75,7 @@ export class HomePage {
 
   loadTodaysBoard() {
     let rows = this.localStorage.getBoard();
+    console.log(rows);
     if(!rows || !rows.length) {
       this.userNumbers = [...this.disorderArray];
       rows = [...this.userNumbers];
@@ -147,7 +152,7 @@ export class HomePage {
       return;
     } else if(!this.selectedChar) {
       if(this.auxChar) {
-        this.unToggleLastValues();
+        this.toggleLastValues(false);
       }
       this.selectedChar = { ...val };
       return;
@@ -155,19 +160,18 @@ export class HomePage {
       this.selectedChar = null;
       return;
     }
-    this.quizz.toggleCheckCell(val.row, val.col);
-    this.quizz.toggleCheckCell(this.selectedChar.row, this.selectedChar.col);
 
     this.selectedCharAux = { ...this.selectedChar };
-    this.auxChar = val;
+    this.auxChar = { ...val};
+    this.toggleLastValues(true);
 
     this.changePositions(val);
     this.selectedChar = null;
   }
 
-  unToggleLastValues() {
-      this.quizz.toggleCheckCell(this.auxChar.row, this.auxChar.col);
-      this.quizz.toggleCheckCell(this.selectedCharAux.row, this.selectedCharAux.col);
+  toggleLastValues(selected) {
+      this.quizz.setCheck(this.auxChar.row, this.auxChar.col, selected);
+      this.quizz.setCheck(this.selectedCharAux.row, this.selectedCharAux.col, selected);
   }
 
   changePositions(val: any) {
@@ -204,8 +208,8 @@ export class HomePage {
   }
 
   timeOut() {
-    this.finish = true;
     this.running = false;
+    this.remaining = 0;
     clearInterval(this.timerRef);
     this.localStorage.setRemainingTime(0);
     this.localStorage.addStatistics(this.quizz.numCorrectRows().length);
@@ -215,12 +219,11 @@ export class HomePage {
   }
 
   startTimer() {
-    let remaining = this.localStorage.getRemainingTime();
-    this.counter = new Date(this.counter.getTime() + remaining);
+    this.counter = new Date(this.counter.getTime() + this.remaining);
     this.timerRef = setInterval(() => {
       this.counter = new Date(this.counter.getTime() - millisecondsOnOneSecond);
-      remaining -= millisecondsOnOneSecond;
-      this.localStorage.setRemainingTime(remaining);
+      this.remaining -= millisecondsOnOneSecond;
+      this.localStorage.setRemainingTime(this.remaining);
       if(this.counter.getMinutes() > 50) {
         this.timeOut();
       }

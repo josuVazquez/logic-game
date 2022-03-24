@@ -17,7 +17,8 @@
 
 <div class="content"> 
   <div class="spinner " [ngClass]="{'rotating': running, 'shaking': counter.getMinutes() < 1 && counter.getSeconds() < 30}" (click)="start()">
-    <p *ngIf="!running">{{ "HOME.START" | translate }}</p>
+    <p *ngIf="!running && remaining !== 0">{{ "HOME.START" | translate }}</p>
+    <p *ngIf="!running && remaining === 0">{{ "HOME.NOTIME" | translate }}</p>
     <div *ngIf="running">{{ counter | date:'mm:ss' }}</div>
   </div>
   <table class="table">

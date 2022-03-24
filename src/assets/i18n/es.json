@@ -1,7 +1,8 @@
 {
     "HOME": {
         "title": "CODEBREAKER",
-        "START": "START"
+        "START": "START",
+        "NOTIME": "Vuelve mañana"
     },
     "info": {
         "title": "INFO",

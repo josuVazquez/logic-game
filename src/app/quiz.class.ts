@@ -29,9 +29,9 @@ export class Quizz {
         });
     }
 
-    toggleCheckCell(row, column) {
+    setCheck(row, column, selected = false) {
         const value = this.rows[row].cells[column];
-        value.selected = !value.selected;
+        value.selected = selected;
     }
 }
 

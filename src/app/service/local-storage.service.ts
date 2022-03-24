@@ -80,7 +80,7 @@ export class LocalStorageService {
   }
 
   getRemainingTime() {
-    return JSON.parse(localStorage.getItem('remaining')) || millisecondsOnTwoMinitsAndHalf;
+    return JSON.parse(localStorage.getItem('remaining')) ?? millisecondsOnTwoMinitsAndHalf;
   }
 
   getTodaysQuery() {
